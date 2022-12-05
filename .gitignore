@@ -21,3 +21,20 @@ server/Homestead.yaml
 server/Homestead.json
 server//.vagrant
 server/.phpunit.result.cache
+
+# Android Studio
+uas-mobile/*.iml
+uas-mobile/.gradle
+uas-mobile//local.properties
+uas-mobile/.idea/caches
+uas-mobile/.idea/libraries
+uas-mobile/.idea/modules.xml
+uas-mobile/.idea/workspace.xml
+uas-mobile/.idea/navEditor.xml
+uas-mobile/.idea/assetWizardSettings.xml
+uas-mobile/.DS_Store
+uas-mobile//build
+uas-mobile//captures
+uas-mobile/.externalNativeBuild
+uas-mobile/.cxx
+uas-mobile/local.properties
