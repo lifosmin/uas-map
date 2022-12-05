@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 
@@ -63,16 +64,17 @@ class UserController extends Controller
         }
     }
 
-    public function getUser()
+    public function getUser(Request $request)
     {
         try {
+            $user = $request->user();
             return response()->json([
                 'message' => 'User fetched successfully',
-                'user' => auth()->user()
+                'user' => $user
             ], 200);
         } catch (\Exception $e) {
             return response()->json([
-                'message' => 'User login failed',
+                'message' => 'User fetch failed',
                 'error' => $e->getMessage()
             ], 500);
         }
