@@ -1,10 +1,10 @@
-package id.ac.umn.uas
+package id.ac.umn.uas.activities
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
-import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import id.ac.umn.uas.R
 
 class TrackSeekerActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

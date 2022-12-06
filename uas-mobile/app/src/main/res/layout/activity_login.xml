@@ -45,6 +45,12 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView">
 
         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/welcomeHead"
+            android:visibility="gone"/>
+
+        <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -62,20 +68,20 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/username"
+                android:id="@+id/email"
                 android:layout_width="10sp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:text="Username"
+                android:text="Email"
                 android:textColor="@color/dark_blue"
                 android:textSize="16sp" />
 
             <EditText
-                android:id="@+id/usernameEdit"
+                android:id="@+id/editEmailText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="5"
-                android:hint="Username"
+                android:hint="Email"
                 android:textAlignment="textStart"
                 android:textColor="@color/black"
                 android:textSize="16sp"
@@ -92,7 +98,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/pwd"
+                android:id="@+id/password"
                 android:layout_width="10sp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
@@ -101,7 +107,7 @@
                 android:textSize="16sp" />
 
             <EditText
-                android:id="@+id/pwdEdit"
+                android:id="@+id/editPasswordText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="5"
@@ -122,7 +128,7 @@
             >
             <Button
                 android:backgroundTint="@color/dark_blue"
-                android:id="@+id/buttonLogin"
+                android:id="@+id/buttonSignIn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Login"
@@ -131,11 +137,11 @@
                 android:paddingVertical="8dp"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/linearLayoutSignUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center"
-
             android:layout_marginVertical="5dp"
             >
 

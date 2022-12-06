@@ -1,10 +1,11 @@
-package id.ac.umn.uas
+package id.ac.umn.uas.activities
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import id.ac.umn.uas.R
 
 class ProviderActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -12,7 +13,9 @@ class ProviderActivity: AppCompatActivity() {
         setContentView(R.layout.activity_home_provider)
 
         var intentDetailProvider = findViewById<LinearLayout>(R.id.detailProvider)
-        var intentAddJob = findViewById<com.google.android.material.floatingactionbutton.FloatingActionButton>(R.id.addJob)
+        var intentAddJob = findViewById<com.google.android.material.floatingactionbutton.FloatingActionButton>(
+            R.id.addJob
+        )
         var intentButtonAddJob = findViewById<Button>(R.id.buttonAddJob)
         intentDetailProvider.setOnClickListener {
             val intentDetail = Intent(this, DetailProviderActivity::class.java)
