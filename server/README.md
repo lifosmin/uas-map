@@ -1,2 +1,0 @@
-# uas-mobile-server
- 
