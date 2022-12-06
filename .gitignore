@@ -46,6 +46,30 @@ server/.phpunit.result.cache
 /uas-mobile-server/.vagrant
 /uas-mobile-server/.phpunit.result.cache
 
+/uas-server/vendor/
+/uas-server/node_modules/
+/uas-server/npm-debug.log
+/uas-server/yarn-error.log
+
+# Laravel 4 specific
+/uas-server/bootstrap/compiled.php
+/uas-server/app/storage/
+
+# Laravel 5 & Lumen specific
+/uas-server/public/storage
+/uas-server/public/hot
+
+# Laravel 5 & Lumen specific with changed public path
+/uas-server/public_html/storage
+/uas-server/public_html/hot
+
+/uas-server/storage/*.key
+/uas-server/.env
+/uas-server/Homestead.yaml
+/uas-server/Homestead.json
+/uas-server/.vagrant
+/uas-server/.phpunit.result.cache
+
 # Android Studio
 *.iml
 .gradle
