@@ -22,6 +22,30 @@ server/Homestead.json
 server/.vagrant
 server/.phpunit.result.cache
 
+/uas-mobile-server/vendor/
+/uas-mobile-server/node_modules/
+/uas-mobile-server/npm-debug.log
+/uas-mobile-server/yarn-error.log
+
+# Laravel 4 specific
+/uas-mobile-server/bootstrap/compiled.php
+/uas-mobile-server/app/storage/
+
+# Laravel 5 & Lumen specific
+/uas-mobile-server/public/storage
+/uas-mobile-server/public/hot
+
+# Laravel 5 & Lumen specific with changed public path
+/uas-mobile-server/public_html/storage
+/uas-mobile-server/public_html/hot
+
+/uas-mobile-server/storage/*.key
+/uas-mobile-server/.env
+/uas-mobile-server/Homestead.yaml
+/uas-mobile-server/Homestead.json
+/uas-mobile-server/.vagrant
+/uas-mobile-server/.phpunit.result.cache
+
 # Android Studio
 *.iml
 .gradle
