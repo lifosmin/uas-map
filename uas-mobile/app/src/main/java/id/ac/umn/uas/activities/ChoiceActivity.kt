@@ -23,8 +23,6 @@ class ChoiceActivity : AppCompatActivity() {
         val user = intent.getStringExtra("User")
         val welcome = intent.getStringExtra("Welcome")
 
-        Log.d("ChoiceActivity", "User: $user")
-
 //        Change welcomeHead text into welcome data
         val welcomeHead = findViewById<TextView>(R.id.welcomeHead)
         welcomeHead.text = welcome
@@ -34,10 +32,16 @@ class ChoiceActivity : AppCompatActivity() {
 
         buttonProvider.setOnClickListener {
             val intentProvider = Intent(this, ProviderActivity::class.java)
+
+            intentProvider.putExtra("User", user.toString())
+
             startActivity(intentProvider)
         }
         buttonSeeker.setOnClickListener {
             val intentSeeker = Intent(this, SeekerActivity::class.java)
+
+            intentSeeker.putExtra("User", user.toString())
+
             startActivity(intentSeeker)
         }
     }
