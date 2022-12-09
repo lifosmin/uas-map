@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\JobController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -25,11 +27,17 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('user')->group(function () {
         Route::get('/', [UserController::class, 'getUser']);
     });
+
+     // Buat job processing
+     Route::post('user/create_job',[JobController::class, 'createJob']);
     
 });
 
 Route::prefix('user')->group(function () {
     Route::post('/signin', [UserController::class, 'signIn']);
     Route::post('/signup',[UserController::class, 'signUp']);
+
+   
+
 });
 
