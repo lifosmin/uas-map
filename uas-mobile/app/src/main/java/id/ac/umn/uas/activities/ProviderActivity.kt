@@ -12,7 +12,7 @@ class ProviderActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_provider)
 
-        var intentDetailProvider = findViewById<LinearLayout>(R.id.detailProvider)
+        var intentDetailProvider = findViewById<LinearLayout>(R.id.include)
         var intentAddJob = findViewById<com.google.android.material.floatingactionbutton.FloatingActionButton>(
             R.id.addJob
         )

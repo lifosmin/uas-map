@@ -6,185 +6,420 @@
     android:layout_height="match_parent"
     android:background="@color/dark_blue">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="216dp"
-        android:layout_height="170dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.050000012"
-        app:srcCompat="@drawable/logo"
-        android:paddingBottom="20dp"/>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@drawable/round_top2"
-        android:elevation="10dp"
+        android:weightSum="7"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.75"></LinearLayout>
-
-    <LinearLayout
-        android:elevation="40dp"
-        android:background="@drawable/round_top"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView">
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="SIGN UP"
-            android:textAlignment="center"
-            android:textSize="36dp"
-            android:textColor="@color/secondary_text"
-            android:layout_marginVertical="15dp"/>
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
+            android:id="@+id/Logo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginVertical="5dp"
-            android:orientation="horizontal">
+            android:layout_height="0dp"
+            android:layout_weight="1.5"
+            android:orientation="vertical"
+            android:layout_gravity="center">
 
-            <TextView
-                android:id="@+id/nama"
-                android:layout_width="10sp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:text="Nama"
-                android:textColor="@color/dark_blue"
-                android:textSize="16sp" />
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="126dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_gravity="center"
+                android:src="@drawable/logo"
+                app:layout_constraintBottom_toTopOf="@+id/Logo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <EditText
-                android:id="@+id/editNamaText"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"
-                android:hint="Nama lengkap"
-                android:textAlignment="textStart"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:background="@drawable/round_edit_text"
-                android:padding="5dp"
-                />
         </LinearLayout>
-
+        
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginVertical="5dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/email"
-                android:layout_width="10sp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:text="Email"
-                android:textColor="@color/dark_blue"
-                android:textSize="16sp" />
-
-            <EditText
-                android:id="@+id/editEmailText"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"
-                android:hint="email@email.com"
-                android:textAlignment="textStart"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:background="@drawable/round_edit_text"
-                android:padding="5dp"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginVertical="5dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/password"
-                android:layout_width="10sp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:text="Password"
-                android:textColor="@color/dark_blue"
-                android:textSize="16sp" />
-
-            <EditText
-                android:id="@+id/editPasswordText"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"
-                android:hint="Password"
-                android:textAlignment="textStart"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:background="@drawable/round_edit_text"
-                android:padding="5dp"/>
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginTop="30dp"
-            >
-            <Button
-                android:backgroundTint="@color/dark_blue"
-                android:id="@+id/buttonSignUp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Sign Up"
-                android:textSize="18dp"
-                android:paddingHorizontal="30dp"
-                android:paddingVertical="8dp"/>
-        </LinearLayout>
-        <LinearLayout
-            android:id = "@+id/linearLayoutLogin"
-            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="5.5"
+            android:orientation="vertical"
             android:layout_gravity="center"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginVertical="5dp" >
+            app:layout_constraintBottom_toTopOf="@id/Logo"
+            app:layout_constraintEnd_toEndOf="@id/Logo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/textView17"
-                android:textAlignment="textEnd"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textColor="@color/primary_text"
-                android:text="Sudah punya akun? " />
-            <TextView
-                android:id="@+id/textViewLogin"
-                android:textAlignment="textStart"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Login!"
-                android:textColor="@color/orange"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/round_top2"
+                android:elevation="10dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView"
+                app:layout_constraintVertical_bias="0.75">
+
+                <LinearLayout
+                    android:elevation="40dp"
+                    android:background="@drawable/round_top"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="5"
+                    android:weightSum="10"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1.25"
+                        android:layout_marginBottom="10dp"
+                        android:fontFamily="@font/lemonmilk_regular"
+                        android:gravity="center"
+                        android:text="SIGN UP"
+                        android:textColor="@color/secondary_text"
+                        android:textSize="36sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="8.75"
+                        android:orientation="vertical"
+                        android:scrollbars="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="20dp"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginHorizontal="20dp"
+                                android:layout_marginVertical="5dp"
+                                android:orientation="horizontal">
+
+                                <de.hdodenhof.circleimageview.CircleImageView
+                                    android:layout_width="75dp"
+                                    android:layout_height="75dp"
+                                    android:layout_marginEnd="40dp"
+                                    android:src="@drawable/desc" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="vertical">
+
+                                    <Button
+                                        android:layout_width="match_parent"
+                                        android:layout_height="0dp"
+                                        android:layout_weight="2"
+                                        android:backgroundTint="@color/light_blue"
+                                        android:text="Upload Photo"
+                                        android:textColor="@color/white"
+                                        android:textSize="15dp" />
+
+                                    <Button
+                                        android:layout_width="match_parent"
+                                        android:layout_height="0dp"
+                                        android:layout_weight="2"
+                                        android:backgroundTint="@color/light_blue"
+                                        android:text="Take Photo"
+                                        android:textColor="@color/white"
+                                        android:textSize="15dp" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="20dp"
+                                android:layout_marginVertical="5dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/nama"
+                                    android:layout_width="15sp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="5dp"
+                                    android:layout_weight="2"
+                                    android:text="Nama"
+                                    android:textColor="@color/dark_blue"
+                                    android:textSize="15sp" />
+
+                                <EditText
+                                    android:id="@+id/editNamaText"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="5"
+                                    android:hint="Nama lengkap"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@color/black"
+                                    android:textSize="15sp"
+                                    android:background="@drawable/round_edit_text"
+                                    android:padding="5dp"
+                                    />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="20dp"
+                                android:layout_marginVertical="5dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/email"
+                                    android:layout_width="15sp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="5dp"
+                                    android:layout_weight="2"
+                                    android:text="Email"
+                                    android:textColor="@color/dark_blue"
+                                    android:textSize="15sp" />
+
+                                <EditText
+                                    android:id="@+id/editEmailText"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="5"
+                                    android:hint="email@email.com"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@color/black"
+                                    android:textSize="15sp"
+                                    android:background="@drawable/round_edit_text"
+                                    android:padding="5dp"/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="20dp"
+                                android:layout_marginVertical="5dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/password"
+                                    android:layout_width="15sp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="5dp"
+                                    android:layout_weight="2"
+                                    android:text="Password"
+                                    android:textColor="@color/dark_blue"
+                                    android:textSize="15sp" />
+
+                                <EditText
+                                    android:id="@+id/editPasswordText"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+
+                                    android:layout_weight="5"
+                                    android:hint="Password"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@color/black"
+                                    android:textSize="15sp"
+                                    android:background="@drawable/round_edit_text"
+                                    android:padding="5dp"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="20dp"
+                                android:layout_marginVertical="5dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/tanggalLahir"
+                                    android:layout_width="15sp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="5dp"
+                                    android:layout_weight="2"
+                                    android:text="Tanggal Lahir"
+                                    android:textColor="@color/dark_blue"
+                                    android:textSize="15sp" />
+
+                                <EditText
+                                    android:id="@+id/editTanggalLahirText"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="5"
+                                    android:hint="Tanggal Lahir"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@color/black"
+                                    android:textSize="15sp"
+                                    android:background="@drawable/round_edit_text"
+                                    android:padding="5dp"
+                                    />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="20dp"
+                                android:layout_marginVertical="5dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/jenisKelamin"
+                                    android:layout_width="15sp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="5dp"
+                                    android:layout_weight="2"
+                                    android:text="Jenis Kelamin"
+                                    android:textColor="@color/dark_blue"
+                                    android:textSize="15sp" />
+
+                                <EditText
+                                    android:id="@+id/editJenisKelaminText"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="5"
+                                    android:hint="Laki - laki / Perempuan"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@color/black"
+                                    android:textSize="15sp"
+                                    android:background="@drawable/round_edit_text"
+                                    android:padding="5dp"
+                                    />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="20dp"
+                                android:layout_marginVertical="5dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/alamat"
+                                    android:layout_width="15sp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="5dp"
+                                    android:layout_weight="2"
+                                    android:text="Alamat"
+                                    android:textColor="@color/dark_blue"
+                                    android:textSize="15sp" />
+
+                                <EditText
+                                    android:id="@+id/editAlamatText"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="5"
+                                    android:hint="Jl. Keprabon 1 No 9"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@color/black"
+                                    android:textSize="15sp"
+                                    android:background="@drawable/round_edit_text"
+                                    android:padding="5dp"
+                                    />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="20dp"
+                                android:layout_marginVertical="5dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/noTelpon"
+                                    android:layout_width="15sp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="5dp"
+                                    android:layout_weight="2"
+                                    android:text="No. Telepon"
+                                    android:textColor="@color/dark_blue"
+                                    android:textSize="15sp" />
+
+                                <EditText
+                                    android:id="@+id/editNoTelponText"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="5"
+                                    android:hint="0812345678"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@color/black"
+                                    android:textSize="15sp"
+                                    android:background="@drawable/round_edit_text"
+                                    android:padding="5dp"
+                                    />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:gravity="center"
+                                android:layout_marginTop="5dp"
+                                >
+                                <Button
+                                    android:backgroundTint="@color/dark_blue"
+                                    android:id="@+id/buttonSignUp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Sign Up"
+                                    android:textSize="18dp"
+                                    android:paddingHorizontal="30dp"
+                                    android:paddingTop="8dp"/>
+
+                                <LinearLayout
+                                    android:id = "@+id/linearLayoutLogin"
+                                    android:layout_width="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:gravity="center"
+                                    android:layout_marginBottom="20dp">
+
+                                    <TextView
+                                        android:id="@+id/textView17"
+                                        android:textAlignment="textEnd"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:textColor="@color/primary_text"
+                                        android:text="Sudah punya akun? " />
+                                    <TextView
+                                        android:id="@+id/textViewLogin"
+                                        android:textAlignment="textStart"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="Login!"
+                                        android:textColor="@color/orange"/>
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </ScrollView>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
         </LinearLayout>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

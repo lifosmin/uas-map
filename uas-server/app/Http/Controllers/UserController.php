@@ -5,21 +5,30 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
     public function signUp()
     {
         try {
-            $user = new User();
-            $user->nama = request('nama');
-            $user->email = request('email');
-            $user->password = Hash::make(request('password'));
-            $user->tanggal_lahir = request('tanggal_lahir');
-            $user->jenis_kelamin = request('jenis_kelamin');
-            $user->alamat = request('alamat');
-            $user->no_telp = request('no_telp');
-            $user->save();
+            $validate = Validator::make(request()->all(), [
+                'nama' => 'required',
+                'email' => 'required|email|unique:users',
+                'password' => 'required',
+                'tanggal_lahir' => 'required',
+                'jenis_kelamin' => 'required',
+                'alamat' => 'required',
+                'no_telp' => 'required',
+            ]);
+
+            if($validate->fails()){
+                return response()->json([
+                    'message' => 'User creation failed',
+                    'error' => $validate->errors()
+                ], 400);
+            }
+
             return response()->json([
                 'message' => 'User created successfully',
                 'user' => $user
