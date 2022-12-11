@@ -8,13 +8,48 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 
+use function Psy\debug;
+
 class UserController extends Controller
 {
+    // public function uploadImage(Request $request)
+    // {
+    //     try {
+    //         $validate = Validator::make(request()->all(), [
+    //             'image' => 'required|image:jpeg,png,jpg,gif,svg|max:2048',
+    //         ]);
+
+    //         if($validate->fails()){
+    //             return response()->json([
+    //                 'message' => 'Image upload failed',
+    //                 'error' => $validate->errors()
+    //             ], 400);
+    //         }
+
+    //         if($request->hasFile('image')){
+    //             $image_uploaded_path = 'public/images/user';
+    //             $image = $request->file('image');
+    //             $image_name = request('nama') . '_' . time() . '.' . $image->getClientOriginalExtension();
+    //             $image->storeAs($image_uploaded_path, $image_name);
+    //         }
+
+    //         return response()->json([
+    //             'message' => 'Image uploaded successfully',
+    //             'image' => $image_name
+    //         ], 201);
+    //     } catch (\Exception $e) {
+    //         return response()->json([
+    //             'message' => 'Image upload failed',
+    //             'error' => $e->getMessage()
+    //         ], 500);
+    //     }
+    // }
+
     public function signUp(Request $request)
     {
         try {
             $validate = Validator::make(request()->all(), [
-                'image' => 'required|image:jpeg,png,jpg,gif,svg|max:2048',
+                'image' => 'required|image:jpeg,png,jpg,gif,svg',
                 'nama' => 'required',
                 'email' => 'required|email|unique:users',
                 'password' => 'required',

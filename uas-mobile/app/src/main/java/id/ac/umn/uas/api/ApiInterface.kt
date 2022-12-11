@@ -1,18 +1,26 @@
 package id.ac.umn.uas.api
 
+import android.net.Uri
 import id.ac.umn.uas.models.DefaultResponse
 import id.ac.umn.uas.models.LoginResponse
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 
 interface ApiInterface {
 
-    @FormUrlEncoded
+    @Multipart
     @POST("user/signup")
     fun registerUser(
-        @Field("nama") name: String,
-        @Field("email") email: String,
-        @Field("password") password: String,
+        @Part image: MultipartBody.Part,
+        @Part("nama") nama: RequestBody,
+        @Part("email") email: RequestBody,
+        @Part("password") password: RequestBody,
+        @Part("tanggal_lahir") tanggal_lahir: RequestBody,
+        @Part("jenis_kelamin") jenis_kelamin: RequestBody,
+        @Part("alamat") alamat: RequestBody,
+        @Part("no_telp") no_telp: RequestBody
     ): Call<DefaultResponse>
 
     @FormUrlEncoded

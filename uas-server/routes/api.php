@@ -36,8 +36,6 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::prefix('user')->group(function () {
     Route::post('/signin', [UserController::class, 'signIn']);
     Route::post('/signup',[UserController::class, 'signUp']);
-
-   
-
+    Route::post('/upload_image',[UserController::class, 'uploadImage']);
 });
 

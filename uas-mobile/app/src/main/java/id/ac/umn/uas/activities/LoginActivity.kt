@@ -2,6 +2,7 @@ package id.ac.umn.uas.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import id.ac.umn.uas.R
@@ -75,7 +76,15 @@ class LoginActivity : AppCompatActivity() {
                                                     val intent = Intent(this@LoginActivity, ChoiceActivity::class.java)
 
                                                     val user = response.body()?.user
-                                                    welcomeHead.text = "Welcome, ${user?.nama}"
+
+//                                                    User(alamat=kepo, created_at=2022-12-11T19:25:44.000000Z, email=raphael@gmail.com, id=1, jenis_kelamin=Perempuan, nama=raphael, no_telp=123456789, tanggal_lahir=10 Oktober 2002, updated_at=2022-12-11T19:25:44.000000Z)
+//                                                    get nama from User
+                                                    var nama = user?.nama
+
+                                                    nama = nama?.split(" ")?.joinToString(" ") { it.capitalize() }
+
+
+                                                    welcomeHead.text = "Welcome, " + nama?.substringBefore(" ")
                                                     intent.putExtra("User", user.toString())
                                                     intent.putExtra("Welcome", welcomeHead.text.toString())
 
