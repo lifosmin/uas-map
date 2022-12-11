@@ -6,13 +6,15 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
-    public function signUp()
+    public function signUp(Request $request)
     {
         try {
             $validate = Validator::make(request()->all(), [
+                'image' => 'required|image:jpeg,png,jpg,gif,svg|max:2048',
                 'nama' => 'required',
                 'email' => 'required|email|unique:users',
                 'password' => 'required',
@@ -28,6 +30,24 @@ class UserController extends Controller
                     'error' => $validate->errors()
                 ], 400);
             }
+
+            if($request->hasFile('image')){
+                $image_uploaded_path = 'public/images/user';
+                $image = $request->file('image');
+                $image_name = request('nama') . '_' . time() . '.' . $image->getClientOriginalExtension();
+                $image->storeAs($image_uploaded_path, $image_name);
+            }
+
+            $user = new User();
+            $user->image = $image_name;
+            $user->nama = request('nama');
+            $user->email = request('email');
+            $user->password = Hash::make(request('password'));
+            $user->tanggal_lahir = request('tanggal_lahir');
+            $user->jenis_kelamin = request('jenis_kelamin');
+            $user->alamat = request('alamat');
+            $user->no_telp = request('no_telp');
+            $user->save();
 
             return response()->json([
                 'message' => 'User created successfully',
