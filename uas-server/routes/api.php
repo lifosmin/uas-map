@@ -30,6 +30,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
      // Buat job processing
      Route::post('user/create_job',[JobController::class, 'createJob']);
+     Route::post('user/apply_job',[UserController::class, 'applyJob']);
+     Route::post('user/accept_job',[UserController::class, 'acceptJob']);
+
+
     
 });
 

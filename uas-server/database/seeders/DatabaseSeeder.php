@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Job;
+use App\Models\UserJob;
+
 
 
 class DatabaseSeeder extends Seeder
@@ -20,8 +22,17 @@ class DatabaseSeeder extends Seeder
         User::create([
             'nama' => 'Admin',
             'email' => 'admin@umn.ac.id',
-            'password' => bcrypt('12345'),
+            'password' => bcrypt('1234578'),
+            'tanggal_lahir' => '2002-02-24'
         ]);
+
+        User::create([
+            'nama' => 'User',
+            'email' => 'user@umn.ac.id',
+            'password' => bcrypt('1234578'),
+            'tanggal_lahir' => '2002-01-24'
+        ]);
+
 
         Job::create([
             'job_title' => 'Job test',
@@ -35,6 +46,27 @@ class DatabaseSeeder extends Seeder
             'job_price' => 30000,
             'job_date' => now(),
             'created_by' => 1
+        ]);
+
+        Job::create([
+            'job_title' => 'Job test 3',
+            'job_price' => 30000,
+            'job_date' => now(),
+            'created_by' => 2
+        ]);
+
+        UserJob::create([
+            'job_id' => 1,
+            'took_by' => 2
+        ]);
+
+        UserJob::create([
+            'job_id' => 2,
+            'took_by' => 2
+        ]);
+        UserJob::create([
+            'job_id' => 3,
+            'took_by' => 1
         ]);
     }
 }
