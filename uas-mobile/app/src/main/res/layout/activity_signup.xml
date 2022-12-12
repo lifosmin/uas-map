@@ -134,21 +134,22 @@
                                     <Button
                                         android:id="@+id/uploadImage"
                                         android:layout_width="match_parent"
-                                        android:layout_height="40dp"
+                                        android:layout_height="0dp"
+                                        android:layout_weight="2"
                                         android:backgroundTint="@color/light_blue"
                                         android:text="Upload Photo"
                                         android:textColor="@color/white"
                                         android:textSize="15dp" />
 
-<!--                                    <Button-->
-<!--                                        android:id="@+id/takeImage"-->
-<!--                                        android:layout_width="match_parent"-->
-<!--                                        android:layout_height="0dp"-->
-<!--                                        android:layout_weight="2"-->
-<!--                                        android:backgroundTint="@color/light_blue"-->
-<!--                                        android:text="Take Photo"-->
-<!--                                        android:textColor="@color/white"-->
-<!--                                        android:textSize="15dp" />-->
+                                    <Button
+                                        android:id="@+id/takeImage"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="0dp"
+                                        android:layout_weight="2"
+                                        android:backgroundTint="@color/light_blue"
+                                        android:text="Take Photo"
+                                        android:textColor="@color/white"
+                                        android:textSize="15dp" />
 
                                 </LinearLayout>
 
@@ -235,9 +236,9 @@
                                     android:id="@+id/editPasswordText"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
-
                                     android:layout_weight="5"
                                     android:hint="Password"
+                                    android:inputType="textPassword"
                                     android:textAlignment="textStart"
                                     android:textColor="@color/black"
                                     android:textSize="15sp"
@@ -271,9 +272,11 @@
                                     android:textAlignment="textStart"
                                     android:textColor="@color/black"
                                     android:textSize="15sp"
+                                    android:focusable="false"
                                     android:background="@drawable/round_edit_text"
                                     android:padding="5dp"
-                                    />
+                                    android:inputType="date"/>
+
                             </LinearLayout>
 
                             <LinearLayout
@@ -293,18 +296,45 @@
                                     android:textColor="@color/dark_blue"
                                     android:textSize="15sp" />
 
-                                <EditText
-                                    android:id="@+id/editJenisKelaminText"
+<!--                                <EditText-->
+<!--                                    android:id="@+id/editJenisKelaminText"-->
+<!--                                    android:layout_width="0dp"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_weight="5"-->
+<!--                                    android:hint="Laki/ Perempuan"-->
+<!--                                    android:textAlignment="textStart"-->
+<!--                                    android:textColor="@color/black"-->
+<!--                                    android:textSize="15sp"-->
+<!--                                    android:background="@drawable/round_edit_text"-->
+<!--                                    android:padding="5dp"-->
+<!--                                    />-->
+
+<!--                                make radio button for gender, with laki - laki and perempuan as the option-->
+
+                                <RadioGroup
+                                    android:id="@+id/radioGroupKelamin"
                                     android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
+                                    android:layout_height="20dp"
                                     android:layout_weight="5"
-                                    android:hint="Laki - laki / Perempuan"
-                                    android:textAlignment="textStart"
-                                    android:textColor="@color/black"
-                                    android:textSize="15sp"
-                                    android:background="@drawable/round_edit_text"
-                                    android:padding="5dp"
-                                    />
+                                    android:orientation="horizontal">
+
+                                    <RadioButton
+                                        android:id="@+id/radioLaki"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Laki - laki"
+                                        android:textColor="@color/black"
+                                        android:textSize="15sp" />
+
+                                    <RadioButton
+                                        android:id="@+id/radioPerempuan"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Perempuan"
+                                        android:textColor="@color/black"
+                                        android:textSize="15sp" />
+                                </RadioGroup>
+
                             </LinearLayout>
 
                             <LinearLayout

@@ -21,7 +21,8 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('tanggal_lahir');
-            $table->enum('jenis_kelamin', ['Laki', 'Perempuan'])->nullable();
+            // enum jenis_kelamin, if 1 = laki - laki, and 0 = perempuan
+            $table->enum('jenis_kelamin', ['1', '0']);
             $table->string('alamat')->nullable();
             $table->string('no_telp')->nullable();
             $table->rememberToken();

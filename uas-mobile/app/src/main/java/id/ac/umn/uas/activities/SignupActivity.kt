@@ -1,5 +1,6 @@
 package id.ac.umn.uas.activities
 
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.database.Cursor
 import android.graphics.Bitmap
@@ -20,6 +21,7 @@ import retrofit2.Call
 import retrofit2.Response
 import java.io.ByteArrayOutputStream
 import java.io.File
+import java.util.*
 
 class SignupActivity: AppCompatActivity() {
     private lateinit var apiClient: ApiClient
@@ -33,14 +35,29 @@ class SignupActivity: AppCompatActivity() {
         val editEmailText = findViewById<EditText>(R.id.editEmailText)
         val editPasswordText = findViewById<EditText>(R.id.editPasswordText)
         val editTanggalLahirText = findViewById<EditText>(R.id.editTanggalLahirText)
-        val editJenisKelaminText = findViewById<EditText>(R.id.editJenisKelaminText)
         val editAlamatText = findViewById<EditText>(R.id.editAlamatText)
         val editNoTelpText = findViewById<EditText>(R.id.editNoTelponText)
 
+        val radioKelamin = findViewById<RadioGroup>(R.id.radioGroupKelamin)
+
         val btnGambar = findViewById<Button>(R.id.uploadImage)
+        val btnAmbilGambar = findViewById<Button>(R.id.takeImage)
 
         val btnSignup = findViewById<Button>(R.id.buttonSignUp)
         val btnLogin = findViewById<LinearLayout>(R.id.linearLayoutLogin)
+
+        editTanggalLahirText.setOnClickListener {
+            val c = Calendar.getInstance()
+            val year = c.get(Calendar.YEAR)
+            val month = c.get(Calendar.MONTH)
+            val day = c.get(Calendar.DAY_OF_MONTH)
+
+            val monthString = arrayOf("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember")
+                val dpd = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                    editTanggalLahirText.setText("$dayOfMonth ${monthString[monthOfYear]} $year")
+                }, year, month, day)
+            dpd.show()
+        }
 
         apiClient = ApiClient()
 
@@ -50,7 +67,7 @@ class SignupActivity: AppCompatActivity() {
             val email : RequestBody = RequestBody.create(okhttp3.MultipartBody.FORM, editEmailText.text.toString())
             val password : RequestBody = RequestBody.create(okhttp3.MultipartBody.FORM, editPasswordText.text.toString())
             val tanggalLahir : RequestBody = RequestBody.create(okhttp3.MultipartBody.FORM, editTanggalLahirText.text.toString())
-            val jenisKelamin : RequestBody = RequestBody.create(okhttp3.MultipartBody.FORM, editJenisKelaminText.text.toString())
+            val jenisKelamin : RequestBody = RequestBody.create(okhttp3.MultipartBody.FORM, if(radioKelamin.checkedRadioButtonId == R.id.radioLaki) "1" else "0")
             val alamat : RequestBody = RequestBody.create(okhttp3.MultipartBody.FORM, editAlamatText.text.toString())
             val noTelp : RequestBody = RequestBody.create(okhttp3.MultipartBody.FORM, editNoTelpText.text.toString())
 
@@ -74,9 +91,8 @@ class SignupActivity: AppCompatActivity() {
                 editTanggalLahirText.requestFocus()
                 return@setOnClickListener
             }
-            if(editJenisKelaminText.text.toString().isEmpty()){
-                editJenisKelaminText.error = "Jenis Kelamin is required"
-                editJenisKelaminText.requestFocus()
+            if(radioKelamin.checkedRadioButtonId == -1){
+                Toast.makeText(this, "Jenis Kelamin is required", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             if(editAlamatText.text.toString().isEmpty()){
@@ -124,6 +140,11 @@ class SignupActivity: AppCompatActivity() {
             intent.data = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
             startActivityForResult(intent, 1)
         }
+
+        btnAmbilGambar.setOnClickListener {
+            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            startActivityForResult(intent, 2)
+        }
     }
 
     private fun getImageUri(): Any {
@@ -148,6 +169,11 @@ class SignupActivity: AppCompatActivity() {
             var profileImage = findViewById<CircleImageView>(R.id.profile_image)
             var imageUri = data.data
             profileImage.setImageURI(imageUri)
+        }
+        if (requestCode == 2 && resultCode == RESULT_OK) {
+            val imageBitmap = data?.extras?.get("data") as Bitmap
+            var profileImage = findViewById<CircleImageView>(R.id.profile_image)
+            profileImage.setImageBitmap(imageBitmap)
         }
 
     }
