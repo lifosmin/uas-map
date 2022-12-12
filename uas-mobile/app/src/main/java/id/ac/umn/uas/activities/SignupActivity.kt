@@ -26,6 +26,7 @@ import java.util.*
 class SignupActivity: AppCompatActivity() {
     private lateinit var apiClient: ApiClient
     private var image: MultipartBody.Part? = null
+    private var isImageChanged = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -106,11 +107,23 @@ class SignupActivity: AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            val imageUri = getImageUri()
-
-            val imageFile = File(getRealPathFromURI(imageUri))
-            val requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), imageFile)
-            image = MultipartBody.Part.createFormData("image", imageFile.name, requestBody)
+            if(!isImageChanged) {
+                val bitmap =
+                    (resources.getDrawable(R.drawable.default_profile_picture) as BitmapDrawable).bitmap
+                val stream = ByteArrayOutputStream()
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
+                val byteArray = stream.toByteArray()
+                val file = File(cacheDir, "default_image.jpg")
+                file.writeBytes(byteArray)
+                val requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file)
+                image = MultipartBody.Part.createFormData("image", file.name, requestFile)
+            }else {
+                val imageUri = getImageUri()
+                val imageFile = File(getRealPathFromURI(imageUri))
+                val requestBody =
+                    RequestBody.create(MediaType.parse("multipart/form-data"), imageFile)
+                image = MultipartBody.Part.createFormData("image", imageFile.name, requestBody)
+            }
 
             apiClient.getApiInterface(this).registerUser(image, nama, email, password, tanggalLahir, jenisKelamin, alamat, noTelp).enqueue(object: retrofit2.Callback<DefaultResponse> {
                 override fun onResponse(call: Call<DefaultResponse>, response: Response<DefaultResponse>) {
@@ -169,13 +182,14 @@ class SignupActivity: AppCompatActivity() {
             var profileImage = findViewById<CircleImageView>(R.id.profile_image)
             var imageUri = data.data
             profileImage.setImageURI(imageUri)
+            isImageChanged = true
         }
-        if (requestCode == 2 && resultCode == RESULT_OK) {
+        else if (requestCode == 2 && resultCode == RESULT_OK) {
             val imageBitmap = data?.extras?.get("data") as Bitmap
             var profileImage = findViewById<CircleImageView>(R.id.profile_image)
             profileImage.setImageBitmap(imageBitmap)
+            isImageChanged = true
         }
-
     }
 
 }
