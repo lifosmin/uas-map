@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\UserJob;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
@@ -41,7 +43,7 @@ class UserController extends Controller
     //         return response()->json([
     //             'message' => 'Image upload failed',
     //             'error' => $e->getMessage()
-    //         ], 500);
+    //         ], Response::HTTP_INTERNAL_SERVER_ERROR);
     //     }
     // }
 
@@ -92,7 +94,7 @@ class UserController extends Controller
             return response()->json([
                 'message' => 'User creation failed',
                 'error' => $e->getMessage()
-            ], 500);
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -105,24 +107,24 @@ class UserController extends Controller
                     return response()->json([
                         'message' => 'User logged in successfully',
                         'token' => $token
-                    ], 200);
+                    ], Response::HTTP_OK);
                 } else {
                     return response()->json([
                         'message' => 'User login failed',
                         'error' => 'Invalid password'
-                    ], 401);
+                    ], Response::HTTP_UNAUTHORIZED);
                 }
             } else {
                 return response()->json([
                     'message' => 'User login failed',
                     'error' => 'User not found'
-                ], 404);
+                ], Response::HTTP_NOT_FOUND);
             }
         } catch (\Exception $e) {
             return response()->json([
                 'message' => 'User login failed',
                 'error' => $e->getMessage()
-            ], 500);
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -138,12 +140,12 @@ class UserController extends Controller
             return response()->json([
                 'message' => 'User fetched successfully',
                 'user' => $user
-            ], 200);
+            ], Response::HTTP_OK);
         } catch (\Exception $e) {
             return response()->json([
                 'message' => 'User fetch failed',
                 'error' => $e->getMessage()
-            ], 500);
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -157,24 +159,24 @@ class UserController extends Controller
                     return response()->json([
                         'message' => 'User logged in successfully',
                         'token' => $token
-                    ], 200);
+                    ], Response::HTTP_OK);
                 } else {
                     return response()->json([
                         'message' => 'User login failed',
                         'error' => 'Invalid password'
-                    ], 401);
+                    ], Response::HTTP_UNAUTHORIZED);
                 }
             } else {
                 return response()->json([
                     'message' => 'User login failed',
                     'error' => 'User not found'
-                ], 404);
+                ], Response::HTTP_NOT_FOUND);
             }
         } catch (\Exception $e) {
             return response()->json([
                 'message' => 'User login failed',
                 'error' => $e->getMessage()
-            ], 500);
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -184,12 +186,70 @@ class UserController extends Controller
             $request->user()->currentAccessToken()->delete();
             return response()->json([
                 'message' => 'User logged out successfully'
-            ], 200);
+            ], Response::HTTP_OK);
         } catch (\Exception $e) {
             return response()->json([
                 'message' => 'User logout failed',
                 'error' => $e->getMessage()
-            ], 500);
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
+    }
+
+    public function applyJob(Request $request){
+        $validated = $request->validate([
+            "job_id" => "integer|required",
+        ]);
+        $validated['took_by'] = auth()->user()->id;
+        $arrayJob = User::find($validated['took_by'])->applyJob->pluck('job_id')->toArray();
+        $arrayCreated = User::find($validated['took_by'])->job->pluck('id')->toArray();
+        //biar orang ga ngambil job 2 kali
+        if(in_array($validated['job_id'], $arrayJob)) {
+            return response()->json([
+                'message' => 'User applied the job already',
+            ], Response::HTTP_NOT_ACCEPTABLE);
+        } else if (in_array($validated['job_id'], $arrayCreated)) {
+            return response()->json([
+                'message' => 'User created the job',
+            ], Response::HTTP_NOT_ACCEPTABLE);
+        }
+
+        try {
+            UserJob::create($validated);
+
+            return response()->json([
+                'message' => 'User applied job successfully'
+            ], Response::HTTP_CREATED);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'User failed applied job',
+                'error' => $e->getMessage()
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public function acceptJob(Request $request){
+        $validated = $request->validate([
+            "user_job_id" => "integer|required",
+            "action" => "string|in:confirm,reject"
+        ]);
+        
+        $user_job = UserJob::findOrFail($validated['user_job_id']);
+        //biar orang ga ngambil job 2 kali
+        if($validated["action"]=="confirm") {
+            $user_job->status = 1;
+            $user_job->save();
+            return response()->json([
+                'message' => 'Job succesfully accepted'
+            ], Response::HTTP_CREATED);
+        } else if($validated["action"]=="reject") {
+            $user_job->status = 2;
+            $user_job->save();
+            return response()->json([
+                'message' => 'Job succesfully rejected'
+            ], Response::HTTP_CREATED);
+        } 
+        
+
+        
     }
 }

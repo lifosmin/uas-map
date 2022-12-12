@@ -14,6 +14,11 @@ class Job extends Model
         return $this->belongsTo(User::class, 'created_by');
     }
 
+    public function applyJob()
+    {
+        return $this->hasMany(UserJob::class, 'job_id', 'id');
+    }
+
     protected $guarded = [
         'id'
     ];
