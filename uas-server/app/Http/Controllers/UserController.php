@@ -51,7 +51,7 @@ class UserController extends Controller
     {
         try {
             $validate = Validator::make(request()->all(), [
-                'image' => 'required|image:jpeg,png,jpg,gif,svg',
+                'image' => 'required|image:jpeg,png,jpg,gif,svg|max:2048',
                 'nama' => 'required',
                 'email' => 'required|email|unique:users',
                 'password' => 'required',
@@ -60,7 +60,7 @@ class UserController extends Controller
                 'alamat' => 'required',
                 'no_telp' => 'required',
             ]);
-
+        
             if($validate->fails()){
                 return response()->json([
                     'message' => 'User creation failed',
@@ -69,7 +69,7 @@ class UserController extends Controller
             }
 
             if($request->hasFile('image')){
-                $image_uploaded_path = 'public/images/user';
+                $image_uploaded_path = 'images/user';
                 $image = $request->file('image');
                 $image_name = request('nama') . '_' . time() . '.' . $image->getClientOriginalExtension();
                 $image->storeAs($image_uploaded_path, $image_name);
