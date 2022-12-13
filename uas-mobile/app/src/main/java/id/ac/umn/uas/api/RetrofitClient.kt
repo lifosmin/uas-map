@@ -7,5 +7,5 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
 //    get token from session manager
-    const val BASE_URL = "http://192.168.1.7:8000/api/"
+    const val BASE_URL = "https://raphaelgregorius.com/api/"
 }
