@@ -12,24 +12,36 @@ use Illuminate\Http\Request;
 class JobController extends Controller
 {
     // Funtion to create job
-
     public function createJob() {
-        try {
-            $job = new Job();
-            $job->job_title = request('job_title');
-            $job->job_desc = request('job_desc');
-            $job->job_price = request('job_price');
-            $job->job_location = request('job_location');
-            $job->job_quota = request('job_quota');
+        $validated = request()->validate([
+            "judul" => "string|required",
+            "deskripsi" => "string|required",
+            "gaji" => "integer|required",
+            "lokasi" => "string|required",
+            "image" => "required|image:jpeg,png,jpg,gif,svg|max:2048",
+        ]);
 
+        try {
+            if(request()->hasFile('image')){
+                $image_uploaded_path = 'images/job';
+                $image = request()->file('image');
+                $image_name = request('judul') . '_' . time() . '.' . $image->getClientOriginalExtension();
+                $image->storeAs($image_uploaded_path, $image_name);
+            }
+
+            $job = new Job();
+            $job->job_title = $validated['judul'];
+            $job->job_desc = $validated['deskripsi'];
+            $job->job_price = $validated['gaji'];
+            $job->job_location = $validated['lokasi'];
+            $job->job_image = $image_name;
             $job->created_by = auth()->user()->id;
             $job->save();
-
 
             return response()->json([
                 'message' => 'Job created successfully',
                 'job' => $job
-            ], Response::HTTP_CREATED);
+            ], Response::HTTP_OK);
         } catch (\Exception $e) {
             return response()->json([
                 'message' => 'Job creation failed',
@@ -80,7 +92,10 @@ class JobController extends Controller
 
     public function getAvailableJob() {
         try {
-            $jobs = Job::where('created_by','!=', auth()->user()->id)->get();
+            $jobs = Job::where('created_by', '!=', auth()->user()->id)->get();
+            foreach ($jobs as $job){
+                $job->job_image = asset('images/job/' . $job->job_image);
+            }
 
             return response()->json([
                 'message' => 'Job get succesfully',
@@ -92,6 +107,5 @@ class JobController extends Controller
                 'error' => $e->getMessage()
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
-        
     }
 }

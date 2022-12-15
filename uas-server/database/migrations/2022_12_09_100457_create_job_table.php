@@ -22,9 +22,9 @@ class CreateJobTable extends Migration
             $table->string("job_location");
 
             $table->integer("job_price");
-            $table->date("job_date")->default(now());
+            $table->timestamp("job_date")->default(now());
             $table->integer("status")->default(0);
-            $table->integer("job_quota");
+            $table->integer("job_quota")->default(0);
             $table->foreignId('created_by')->constrained('users', 'id');
 
             $table->timestamps();

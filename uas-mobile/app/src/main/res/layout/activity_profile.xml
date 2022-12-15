@@ -7,192 +7,386 @@
     android:background="@color/dark_blue"
     >
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="BIODATA"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.031" />
-
     <LinearLayout
-        android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-
-        android:layout_marginTop="30dp"
-        android:background="@color/light_blue"
-        android:elevation="40dp"
+        android:layout_height="match_parent"
+        android:weightSum="6"
         android:orientation="vertical"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2">
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imageView4"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_marginVertical="15dp"
-            android:src="@drawable/desc" />
+        android:background="@color/dark_blue"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginVertical="5dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/name"
-                android:layout_width="10sp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Nama"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/nameEdit"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:text="Budi Hartono"
-                android:textAlignment="textStart"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginVertical="5dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/date"
-                android:layout_width="10sp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:text="Tanggal Lahir"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/dateEdit"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:text="23-07-1994"
-                android:textAlignment="textStart"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginVertical="5dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/gender"
-                android:layout_width="10sp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:text="Gender"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/genderEdit"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:text="Laki-laki"
-                android:textAlignment="textStart"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginVertical="5dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/alamat"
-                android:layout_width="10sp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:text="Alamat"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
-
-            <TextView
-                android:paddingVertical="5dp"
-                android:id="@+id/alamatEdit"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:text="Scientia Residence, Jl. Scientia Square Utara, Curug Sangereng, Kec. Klp. Dua, Kabupaten Tangerang, Banten 15810"
-                android:textAlignment="textStart"
-                android:textColor="@color/black"
-                android:textSize="12sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginVertical="5dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/telp"
-                android:layout_width="10sp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:text="No Telp"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/telpEdit"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:text="082328847772"
-                android:textAlignment="textStart"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginVertical="30dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             >
-            <Button
-                android:backgroundTint="@color/orange"
-                android:id="@+id/button8"
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Biodata"
+                android:textColor="@color/white"
+                android:textSize="45sp"
+                android:layout_marginTop="20dp"
+                android:gravity="bottom|center"
+                android:fontFamily="@font/lemonmilk_regular"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Log Out" />
+                android:layout_gravity="center"
+                android:src="@drawable/default_profile_picture"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.6"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:gravity="center"
+            >
+                <Button
+                    android:id="@+id/uploadImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/light_blue"
+                    android:fontFamily="@font/lemonmilk_regular"
+                    android:text="Upload Photo"
+                    android:textColor="@color/white"
+                    android:layout_marginRight="10dp"
+                    android:textSize="15dp" />
+
+                <Button
+                    android:id="@+id/takeImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/light_blue"
+                    android:fontFamily="@font/lemonmilk_regular"
+                    android:text="Take Photo"
+                    android:textColor="@color/white"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="15dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3.39"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@color/light_blue"
+            >
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="8.75"
+                android:orientation="vertical"
+                android:scrollbars="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="5dp"
+                        android:orientation="horizontal">
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="5dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/nama"
+                            android:layout_width="15sp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="2"
+                            android:text="Nama"
+                            android:textColor="@color/dark_blue"
+                            android:textSize="15sp" />
+
+                        <EditText
+                            android:id="@+id/editNamaText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="5"
+                            android:hint="Nama lengkap"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:background="@drawable/round_edit_text"
+                            android:padding="5dp"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="5dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/email"
+                            android:layout_width="15sp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="2"
+                            android:text="Email"
+                            android:textColor="@color/dark_blue"
+                            android:textSize="15sp" />
+
+                        <EditText
+                            android:id="@+id/editEmailText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="5"
+                            android:hint="email@email.com"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:background="@drawable/round_edit_text"
+                            android:padding="5dp"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="5dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/password"
+                            android:layout_width="15sp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="2"
+                            android:text="Password"
+                            android:textColor="@color/dark_blue"
+                            android:textSize="15sp" />
+
+                        <EditText
+                            android:id="@+id/editPasswordText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="5"
+                            android:hint="Password"
+                            android:inputType="textPassword"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:background="@drawable/round_edit_text"
+                            android:padding="5dp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="5dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tanggalLahir"
+                            android:layout_width="15sp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="2"
+                            android:text="Tanggal Lahir"
+                            android:textColor="@color/dark_blue"
+                            android:textSize="15sp" />
+
+                        <EditText
+                            android:id="@+id/editTanggalLahirText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="5"
+                            android:hint="Tanggal Lahir"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:focusable="false"
+                            android:background="@drawable/round_edit_text"
+                            android:padding="5dp"
+                            android:inputType="date"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="5dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/jenisKelamin"
+                            android:layout_width="15sp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="2"
+                            android:text="Jenis Kelamin"
+                            android:textColor="@color/dark_blue"
+                            android:textSize="15sp" />
+
+                        <RadioGroup
+                            android:id="@+id/radioGroupKelamin"
+                            android:layout_width="0dp"
+                            android:layout_height="20dp"
+                            android:layout_weight="5"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/radioLaki"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Laki - laki"
+                                android:textColor="@color/black"
+                                android:gravity="center_vertical"
+                                android:textSize="13sp" />
+
+                            <RadioButton
+                                android:id="@+id/radioPerempuan"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Perempuan"
+                                android:textColor="@color/black"
+                                android:gravity="center_vertical"
+                                android:textSize="13sp" />
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="5dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/alamat"
+                            android:layout_width="15sp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="2"
+                            android:text="Alamat"
+                            android:textColor="@color/dark_blue"
+                            android:textSize="15sp" />
+
+                        <EditText
+                            android:id="@+id/editAlamatText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="5"
+                            android:hint="Jl. Keprabon 1 No 9"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:background="@drawable/round_edit_text"
+                            android:padding="5dp"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="5dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/noTelpon"
+                            android:layout_width="15sp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="2"
+                            android:text="No. Telepon"
+                            android:textColor="@color/dark_blue"
+                            android:textSize="15sp" />
+
+                        <EditText
+                            android:id="@+id/editNoTelponText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="5"
+                            android:hint="0812345678"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:background="@drawable/round_edit_text"
+                            android:padding="5dp"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_marginTop="5dp"
+                        >
+                        <Button
+                            android:backgroundTint="@color/dark_blue"
+                            android:id="@+id/btnSimpan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Simpan"
+                            android:textSize="18dp"
+                            android:paddingHorizontal="30dp"
+                            android:paddingTop="8dp"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </ScrollView>
+
         </LinearLayout>
 
     </LinearLayout>

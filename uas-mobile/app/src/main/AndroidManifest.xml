@@ -59,6 +59,10 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:exported="false">
         </activity>
+        <activity android:name=".activities.ProfileActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:exported="false">
+        </activity>
         <activity
             android:name=".activities.MainActivity"
             android:theme="@style/AppTheme.NoActionBar"

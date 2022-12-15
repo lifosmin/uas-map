@@ -1,37 +1,45 @@
 package id.ac.umn.uas.activities
 
+import JobAdapter
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.preference.PreferenceManager
-import android.util.Log
-import android.widget.Button
-import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import de.hdodenhof.circleimageview.CircleImageView
 import id.ac.umn.uas.R
 import id.ac.umn.uas.api.ApiClient
 import id.ac.umn.uas.api.SessionManager
-import id.ac.umn.uas.models.DefaultResponse
 import id.ac.umn.uas.models.GetJobResponse
+import id.ac.umn.uas.models.JobList
 import id.ac.umn.uas.models.User
 import retrofit2.Call
 import retrofit2.Response
+
 
 class SeekerActivity: AppCompatActivity() {
 
     private lateinit var sessionManager: SessionManager
     private lateinit var apiClient: ApiClient
+    private lateinit var recyclerView: androidx.recyclerview.widget.RecyclerView
 
     private lateinit var sp: SharedPreferences
+    private var adapter: JobAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_seeker)
+
+        var profile = findViewById<CircleImageView>(R.id.profile_image)
+
+        profile.setOnClickListener {
+            val intent = Intent(this, ProfileActivity::class.java)
+            startActivity(intent)
+        }
 
         apiClient = ApiClient()
 
@@ -57,7 +65,14 @@ class SeekerActivity: AppCompatActivity() {
                 ) {
                     if(response.code() == 200) {
                         val job = response.body()?.job
-                        val dataJob = job
+
+                        val gson = Gson()
+                        val json = gson.toJson(job)
+
+                        val sharedPreferences = getSharedPreferences("sharedPrefs", MODE_PRIVATE)
+                        val editor = sharedPreferences.edit()
+                        editor.putString("job", json)
+                        editor.commit()
                     }
                 }
             })
@@ -65,10 +80,29 @@ class SeekerActivity: AppCompatActivity() {
         val userImage = findViewById<CircleImageView>(R.id.profile_image)
         val welcomeHead = findViewById<TextView>(R.id.welcomeHead)
 
-        welcomeHead.text = "Welcome back, ${userObj?.nama}"
+        welcomeHead.text = "Welcome Back, ${userObj?.nama}"
 
-//        change userImage with userObj image upload bitmap
-        
+//        change userImage with userObj image upload from api via Bitmap
+        val imageUrl = userObj?.image
 
+        Glide.with(this)
+            .load(imageUrl)
+            .into(userImage)
+
+        init()
+
+        recyclerView = findViewById(R.id.seekerRecyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.setHasFixedSize(true)
+        recyclerView.adapter = adapter
+    }
+
+    private fun init() {
+        sp = getSharedPreferences("sharedPrefs", MODE_PRIVATE)
+        val job = sp.getString("job", null)
+
+        val jobObj = Gson().fromJson(job, Array<JobList>::class.java).toList()
+
+        adapter = JobAdapter(jobObj, this)
     }
 }

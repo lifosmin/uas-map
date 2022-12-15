@@ -3,21 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addJob"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_margin="16dp"
-        android:backgroundTint="@color/orange"
-
-        android:src="@drawable/add"
-        app:backgroundTint="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:rippleColor="#F8F8F8" />
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -32,9 +19,9 @@
         app:layout_constraintVertical_bias="0.050000012">
 
         <TextView
-            android:textSize="26dp"
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
+            android:textSize="26sp"
+            android:id="@+id/welcomeHead"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Hai Budi,"
@@ -42,7 +29,7 @@
             />
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imageView4"
+            android:id="@+id/profile_image"
             android:layout_width="40dp"
             android:layout_height="40dp"
 
@@ -54,7 +41,7 @@
         android:layout_width="match_parent"
         android:layout_marginHorizontal="20dp"
         android:layout_height="wrap_content"
-        android:text="ADD JOB +"
+        android:text="Add Job +"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -65,7 +52,7 @@
         app:backgroundTint="@color/orange"
         />
 
-    <androidx.recyclerview.widget.RecyclerView android:id="@+id/include"
+    <androidx.recyclerview.widget.RecyclerView android:id="@+id/seekerRecyclerView"
         android:paddingHorizontal="0dp"
         android:layout_marginVertical="2dp"
         android:layout_marginHorizontal="15dp"
