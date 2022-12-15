@@ -44,5 +44,12 @@ interface ApiInterface {
 
 
     @GET("user")
-    fun getUser(): Call<DefaultResponse>
+    fun getUser(
+
+    ): Call<DefaultResponse>
+
+    @GET("job")
+    fun getJob(
+
+    ): Call<DefaultResponse>
 }

@@ -19,7 +19,7 @@ class CreateJobTable extends Migration
             $table->string("job_desc")->nullable();
             $table->integer("job_price");
             $table->date("job_date")->default(now());
-
+            $table->integer("status")->default(0);
             $table->foreignId('created_by')->constrained('users', 'id');
 
             $table->timestamps();
