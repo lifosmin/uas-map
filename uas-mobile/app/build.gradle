@@ -9,7 +9,7 @@ android {
     defaultConfig {
         applicationId "id.ac.umn.uas"
         minSdk 25
-        targetSdk 32
+        targetSdk 25
         versionCode 3
         versionName "1.2"
 

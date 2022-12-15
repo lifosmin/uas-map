@@ -19,6 +19,9 @@ class JobController extends Controller
             $job->job_title = request('job_title');
             $job->job_desc = request('job_desc');
             $job->job_price = request('job_price');
+            $job->job_location = request('job_location');
+            $job->job_quota = request('job_quota');
+
             $job->created_by = auth()->user()->id;
             $job->save();
 
