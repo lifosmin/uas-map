@@ -2,6 +2,7 @@ package id.ac.umn.uas.api
 
 import android.net.Uri
 import id.ac.umn.uas.models.DefaultResponse
+import id.ac.umn.uas.models.GetJobResponse
 import id.ac.umn.uas.models.LoginResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -45,4 +46,7 @@ interface ApiInterface {
 
     @GET("user")
     fun getUser(): Call<DefaultResponse>
+
+    @GET("user/jobs")
+    fun getJob(): Call<GetJobResponse>
 }

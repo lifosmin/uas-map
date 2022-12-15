@@ -128,6 +128,27 @@ class UserController extends Controller
         }
     }
 
+    // public function getUser(Request $request)
+    // {
+    //     try {
+    //         $user = $request->user();
+    //         if($user->jenis_kelamin == 1){
+    //             $user->jenis_kelamin = 'Laki-laki';
+    //         } else {
+    //             $user->jenis_kelamin = 'Perempuan';
+    //         }
+    //         return response()->json([
+    //             'message' => 'User fetched successfully',
+    //             'user' => $user
+    //         ], Response::HTTP_OK);
+    //     } catch (\Exception $e) {
+    //         return response()->json([
+    //             'message' => 'User fetch failed',
+    //             'error' => $e->getMessage()
+    //         ], Response::HTTP_INTERNAL_SERVER_ERROR);
+    //     }
+    // }
+
     public function getUser(Request $request)
     {
         try {
@@ -137,6 +158,7 @@ class UserController extends Controller
             } else {
                 $user->jenis_kelamin = 'Perempuan';
             }
+            $user->image = asset('storage/images/user/' . $user->image);
             return response()->json([
                 'message' => 'User fetched successfully',
                 'user' => $user
@@ -248,8 +270,5 @@ class UserController extends Controller
                 'message' => 'Job succesfully rejected'
             ], Response::HTTP_CREATED);
         } 
-        
-
-        
     }
 }

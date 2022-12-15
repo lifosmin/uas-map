@@ -1,10 +1,13 @@
 package id.ac.umn.uas.activities
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.google.gson.Gson
 import id.ac.umn.uas.R
 import id.ac.umn.uas.api.ApiClient
 import id.ac.umn.uas.api.SessionManager
@@ -17,6 +20,7 @@ import retrofit2.Response
 class LoginActivity : AppCompatActivity() {
     private lateinit var sessionManager: SessionManager
     private lateinit var apiClient: ApiClient
+//    private lateinit var sp: SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -75,18 +79,17 @@ class LoginActivity : AppCompatActivity() {
                                                 if (response.isSuccessful) {
                                                     val intent = Intent(this@LoginActivity, ChoiceActivity::class.java)
 
-                                                    val user = response.body()?.user
+//                                                    save shared preferences for user data
+                                                    val dataUser = response.body()?.user
 
-//                                                    User(alamat=kepo, created_at=2022-12-11T19:25:44.000000Z, email=raphael@gmail.com, id=1, jenis_kelamin=Perempuan, nama=raphael, no_telp=123456789, tanggal_lahir=10 Oktober 2002, updated_at=2022-12-11T19:25:44.000000Z)
-//                                                    get nama from User
-                                                    var nama = user?.nama
+//                                                    implement gson and preferencemanager
+                                                    val gson = Gson()
+                                                    val json = gson.toJson(dataUser)
 
-                                                    nama = nama?.split(" ")?.joinToString(" ") { it.capitalize() }
-
-
-                                                    welcomeHead.text = "Welcome, " + nama?.substringBefore(" ")
-                                                    intent.putExtra("User", user.toString())
-                                                    intent.putExtra("Welcome", welcomeHead.text.toString())
+                                                    val sharedPreferences = getSharedPreferences("sharedPrefs", MODE_PRIVATE)
+                                                    val editor = sharedPreferences.edit()
+                                                    editor.putString("user", json)
+                                                    editor.commit()
 
                                                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
 

@@ -20,7 +20,7 @@
 
         <TextView
             android:textSize="26sp"
-            android:id="@+id/textView3"
+            android:id="@+id/welcomeHead"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -29,7 +29,7 @@
             />
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imageView4"
+            android:id="@+id/profile_image"
             android:layout_width="40dp"
             android:layout_height="40dp"
 
@@ -52,7 +52,7 @@
         app:backgroundTint="@color/orange"
         />
 
-        <androidx.recyclerview.widget.RecyclerView android:id="@+id/include"
+        <androidx.recyclerview.widget.RecyclerView android:id="@+id/seekerRecyclerView"
             android:paddingHorizontal="0dp"
             android:layout_marginVertical="2dp"
             android:layout_marginHorizontal="15dp"
