@@ -30,4 +30,20 @@ class JobController extends Controller
             ], 500);
         }
     }
+    public function getApplyJob() {
+        try {
+            $jobs = Job::get()->toArray();
+
+
+            return response()->json([
+                'message' => 'User created successfully',
+                'job' => $jobs
+            ], 201);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'User creation failed',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
 }
