@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 use App\Models\Job;
+use App\Models\User;
+use App\Models\UserJob;
+
+use Illuminate\Http\Response;
 
 use Illuminate\Http\Request;
 
@@ -20,30 +24,71 @@ class JobController extends Controller
 
 
             return response()->json([
-                'message' => 'User created successfully',
+                'message' => 'Job created successfully',
                 'job' => $job
-            ], 201);
+            ], Response::HTTP_CREATED);
         } catch (\Exception $e) {
             return response()->json([
-                'message' => 'User creation failed',
+                'message' => 'Job creation failed',
                 'error' => $e->getMessage()
-            ], 500);
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
-    public function getApplyJob() {
-        try {
-            $jobs = Job::get()->toArray();
 
+    public function getJob(Request $request) {
+        $validated = $request->validate([
+            "job_id" => "integer|required",
+        ]);
 
+        try{
+            $job = Job::find($validated['job_id']);
             return response()->json([
-                'message' => 'User created successfully',
-                'job' => $jobs
-            ], 201);
+                'message' => 'Job get succesfully',
+                'job' => $job
+            ], Response::HTTP_OK);
         } catch (\Exception $e) {
             return response()->json([
-                'message' => 'User creation failed',
+                'message' => 'Job get failed',
                 'error' => $e->getMessage()
-            ], 500);
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
+    }
+
+    public function getJobPosted() {
+        try {
+            $jobs_id = User::find(auth()->user()->id)->applyJob->pluck('job_id')->toArray();
+            foreach ($jobs_id as $job){
+                $jobs[] = Job::find($job);
+                $count[] = UserJob::where('job_id', $job)->count();
+            }
+            
+            return response()->json([
+                'message' => 'Job get succesfully',
+                'job' => $jobs,
+                'count' => $count
+            ], Response::HTTP_OK);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Job get failed',
+                'error' => $e->getMessage()
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public function getAvailableJob() {
+        try {
+            $jobs = Job::where('created_by','!=', auth()->user()->id)->get();
+
+            return response()->json([
+                'message' => 'Job get succesfully',
+                'job' => $jobs
+            ], Response::HTTP_OK);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Job get failed',
+                'error' => $e->getMessage()
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+        
     }
 }

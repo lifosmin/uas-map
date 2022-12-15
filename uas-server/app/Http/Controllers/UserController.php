@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\UserJob;
+use App\Models\Job;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
@@ -14,38 +15,6 @@ use function Psy\debug;
 
 class UserController extends Controller
 {
-    // public function uploadImage(Request $request)
-    // {
-    //     try {
-    //         $validate = Validator::make(request()->all(), [
-    //             'image' => 'required|image:jpeg,png,jpg,gif,svg|max:2048',
-    //         ]);
-
-    //         if($validate->fails()){
-    //             return response()->json([
-    //                 'message' => 'Image upload failed',
-    //                 'error' => $validate->errors()
-    //             ], 400);
-    //         }
-
-    //         if($request->hasFile('image')){
-    //             $image_uploaded_path = 'public/images/user';
-    //             $image = $request->file('image');
-    //             $image_name = request('nama') . '_' . time() . '.' . $image->getClientOriginalExtension();
-    //             $image->storeAs($image_uploaded_path, $image_name);
-    //         }
-
-    //         return response()->json([
-    //             'message' => 'Image uploaded successfully',
-    //             'image' => $image_name
-    //         ], 201);
-    //     } catch (\Exception $e) {
-    //         return response()->json([
-    //             'message' => 'Image upload failed',
-    //             'error' => $e->getMessage()
-    //         ], Response::HTTP_INTERNAL_SERVER_ERROR);
-    //     }
-    // }
 
     public function signUp(Request $request)
     {
@@ -270,5 +239,25 @@ class UserController extends Controller
                 'message' => 'Job succesfully rejected'
             ], Response::HTTP_CREATED);
         } 
+    }
+
+    public function jobDone(Request $request) {
+        $validated = $request->validate([
+            "job_id" => "integer|required",
+        ]);
+
+        $job = Job::findOrFail($validated['job_id']);
+        try {
+            $job->status = 1;
+            $job->save();
+            return response()->json([
+                'message' => 'Job succesfully Done'
+            ], Response::HTTP_ACCEPTED);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'User failed applied job',
+                'error' => $e->getMessage()
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 }

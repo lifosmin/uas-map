@@ -68,5 +68,9 @@ class DatabaseSeeder extends Seeder
             'job_id' => 3,
             'took_by' => 1
         ]);
+        UserJob::create([
+            'job_id' => 1,
+            'took_by' => 1
+        ]);
     }
 }
