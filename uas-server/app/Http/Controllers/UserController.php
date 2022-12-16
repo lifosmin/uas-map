@@ -67,6 +67,40 @@ class UserController extends Controller
         }
     }
 
+    public function userUpdate(Request $request)
+    {
+        try {
+
+            if($request->hasFile('image')){
+                $image_uploaded_path = 'images/user';
+                $image = $request->file('image');
+                $image_name = request('nama') . '_' . time() . '.' . $image->getClientOriginalExtension();
+                $image->storeAs($image_uploaded_path, $image_name);
+            }
+
+            $user = User::where('id', auth()->user()->id);
+            $user->image = $image_name;
+            $user->nama = request('nama');
+            $user->email = request('email');
+            $user->password = Hash::make(request('password'));
+            $user->tanggal_lahir = request('tanggal_lahir');
+            $user->jenis_kelamin = request('jenis_kelamin');
+            $user->alamat = request('alamat');
+            $user->no_telp = request('no_telp');
+            $user->save();
+
+            return response()->json([
+                'message' => 'User updated',
+                'user' => $user
+            ], 201);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'User updated',
+                'error' => $e->getMessage()
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
     public function refreshToken(){
         try {
             $user = User::where('email', request('email'))->first();
