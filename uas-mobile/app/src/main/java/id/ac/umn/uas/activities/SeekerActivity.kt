@@ -4,6 +4,7 @@ import JobAdapter
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -64,7 +65,7 @@ class SeekerActivity: AppCompatActivity() {
                     response: Response<GetJobResponse>
                 ) {
                     if(response.code() == 200) {
-                        val job = response.body()?.job
+                        val job = response.body()
 
                         val gson = Gson()
                         val json = gson.toJson(job)
@@ -73,6 +74,13 @@ class SeekerActivity: AppCompatActivity() {
                         val editor = sharedPreferences.edit()
                         editor.putString("job", json)
                         editor.commit()
+
+                        init()
+
+                        recyclerView = findViewById(R.id.seekerRecyclerView)
+                        recyclerView.layoutManager = LinearLayoutManager(this@SeekerActivity)
+                        recyclerView.setHasFixedSize(true)
+                        recyclerView.adapter = adapter
                     }
                 }
             })
@@ -89,20 +97,14 @@ class SeekerActivity: AppCompatActivity() {
             .load(imageUrl)
             .into(userImage)
 
-        init()
-
-        recyclerView = findViewById(R.id.seekerRecyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.setHasFixedSize(true)
-        recyclerView.adapter = adapter
     }
 
     private fun init() {
         sp = getSharedPreferences("sharedPrefs", MODE_PRIVATE)
-        val job = sp.getString("job", null)
+        var job = sp.getString("job", null)
 
-        val jobObj = Gson().fromJson(job, Array<JobList>::class.java).toList()
+        val jobObj = Gson().fromJson(job, GetJobResponse::class.java)
 
-        adapter = JobAdapter(jobObj, this)
+        adapter = JobAdapter(jobObj.job, this)
     }
 }

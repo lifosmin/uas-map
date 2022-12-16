@@ -1,4 +1,5 @@
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,9 +16,11 @@ import id.ac.umn.uas.R
 import id.ac.umn.uas.models.Job
 import id.ac.umn.uas.models.User
 import androidx.fragment.app.FragmentActivity;
+import com.bumptech.glide.request.RequestOptions
+import id.ac.umn.uas.activities.DetailSeekerActivity
 import id.ac.umn.uas.models.JobList
 
-class JobAdapter(private val dataSet: List<JobList>, private val context: Context) :
+class JobAdapter(private val dataSet: List<Job>, private val context: Context) :
     RecyclerView.Adapter<JobAdapter.ViewHolder>() {
 
     /**
@@ -31,6 +34,8 @@ class JobAdapter(private val dataSet: List<JobList>, private val context: Contex
         val judul : TextView
         val lokasi : TextView
         val tanggal : TextView
+        val gaji : TextView
+        val deskripsi : TextView
 
         init {
             // Define click listener for the ViewHolder's View
@@ -40,6 +45,9 @@ class JobAdapter(private val dataSet: List<JobList>, private val context: Contex
             judul = view.findViewById(R.id.judulJob)
             lokasi = view.findViewById(R.id.lokasiJob)
             tanggal = view.findViewById(R.id.tanggalJob)
+            gaji = view.findViewById(R.id.jobGaji)
+            deskripsi = view.findViewById(R.id.jobDeskripsi)
+
         }
     }
 
@@ -57,20 +65,29 @@ class JobAdapter(private val dataSet: List<JobList>, private val context: Contex
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
 
-        viewHolder.id.text = dataSet[position].job?.get(position)?.id.toString()
-        viewHolder.judul.text = dataSet[position].job?.get(position)?.job_title
-        viewHolder.lokasi.text = dataSet[position].job?.get(position)?.job_location
-        viewHolder.tanggal.text = dataSet[position].job?.get(position)?.job_date
+        viewHolder.id.text = dataSet[position].id.toString()
+        viewHolder.judul.text = dataSet[position].job_title
+        viewHolder.lokasi.text = dataSet[position].job_location
+        viewHolder.tanggal.text = dataSet[position].job_date
+        viewHolder.gaji.text = dataSet[position].job_price
+        viewHolder.deskripsi.text = dataSet[position].job_desc
+
 
         Glide.with(context)
-            .load(dataSet[position].job?.get(position)?.job_image)
+            .load(dataSet[position].job_image)
+            .apply(RequestOptions().override(100, 100))
             .into(viewHolder.image)
 
         viewHolder.textView.setOnClickListener {
-            val sp = context.getSharedPreferences("sharedPrefs", AppCompatActivity.MODE_PRIVATE)
-            val editor = sp.edit()
-            editor.putString("job", Gson().toJson(dataSet[position]))
-            editor.apply()
+            val intent = Intent(context, DetailSeekerActivity::class.java)
+            intent.putExtra("id", viewHolder.id.text.toString())
+            intent.putExtra("judul", viewHolder.judul.text.toString())
+            intent.putExtra("lokasi", viewHolder.lokasi.text.toString())
+            intent.putExtra("tanggal", viewHolder.tanggal.text.toString())
+            intent.putExtra("gaji", viewHolder.gaji.text.toString())
+            intent.putExtra("deskripsi", viewHolder.deskripsi.text.toString())
+            intent.putExtra("image", dataSet[position].job_image)
+            context.startActivity(intent)
         }
     }
 

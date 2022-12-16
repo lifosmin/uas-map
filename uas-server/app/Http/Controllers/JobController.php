@@ -94,9 +94,8 @@ class JobController extends Controller
         try {
             $jobs = Job::where('created_by', '!=', auth()->user()->id)->get();
             foreach ($jobs as $job){
-                $job->job_image = asset('images/job/' . $job->job_image);
+                $job->job_image = asset('storage/images/job/' . $job->job_image);
             }
-
             return response()->json([
                 'message' => 'Job get succesfully',
                 'job' => $jobs

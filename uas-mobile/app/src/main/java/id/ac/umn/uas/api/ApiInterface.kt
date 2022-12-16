@@ -49,4 +49,11 @@ interface ApiInterface {
 
     @GET("user/available/jobs")
     fun getJob(): Call<GetJobResponse>
+
+    @FormUrlEncoded
+    @POST("user/apply_job")
+    fun applyJob(
+        @Field("job_id") job_id: Integer,
+        @Header("Authorization") token: String,
+    ): Call<LoginResponse>
 }

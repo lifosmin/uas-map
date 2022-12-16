@@ -92,9 +92,10 @@ class ProviderActivity: AppCompatActivity() {
 
     private fun init() {
         sp = getSharedPreferences("sharedPrefs", MODE_PRIVATE)
-        val job = sp.getString("job", null)
-        val jobList: List<JobList> = Gson().fromJson(job, Array<JobList>::class.java).toList()
+        var job = sp.getString("job", null)
 
-        adapter = JobAdapter(jobList, this)
+        val jobObj = Gson().fromJson(job, GetJobResponse::class.java)
+
+        adapter = JobAdapter(jobObj.job, this)
     }
 }
