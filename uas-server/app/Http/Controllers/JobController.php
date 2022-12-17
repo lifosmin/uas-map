@@ -109,25 +109,6 @@ class JobController extends Controller
         }
     }
 
-    public function getAppliedJob() {
-        try {
-            $jobs_id = User::find(auth()->user()->id)->applyJob->pluck('job_id')->toArray();
-            $jobs = Job::whereIn('id', $jobs_id)->get();
-            foreach ($jobs as $job){
-                $job->job_image = asset('storage/images/job/' . $job->job_image);
-            }
-            return response()->json([
-                'message' => 'Job get succesfully',
-                'job' => $jobs
-            ], Response::HTTP_OK);
-        } catch (\Exception $e) {
-            return response()->json([
-                'message' => 'Job get failed',
-                'error' => $e->getMessage()
-            ], Response::HTTP_INTERNAL_SERVER_ERROR);
-        }
-    }
-
     public function getCountAppliedJob(){
         try {
             $jobs_id = User::find(auth()->user()->id)->applyJob->pluck('job_id')->toArray();
@@ -207,7 +188,7 @@ class JobController extends Controller
                 $i++;
             }
             foreach($job_array as $job) {
-                $job['job_image'] = asset('storage/images/job'.$job['job_image']);
+                $job['job_image'] = asset('storage/images/job/'.$job['job_image']);
                 
             }
 
@@ -234,7 +215,7 @@ class JobController extends Controller
                 
             }
             foreach($user_array as $user) {
-                $user['image'] = asset('storage/images/job'.$user['image']);
+                $user['image'] = asset('storage/images/job/'.$user['image']);
                 
             }
 

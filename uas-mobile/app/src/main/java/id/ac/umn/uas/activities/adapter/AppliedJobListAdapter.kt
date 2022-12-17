@@ -32,6 +32,7 @@ class AppliedJobListAdapter(private val dataSet: List<Job>, private val context:
         val tanggal : TextView
         val gaji : TextView
         val deskripsi : TextView
+        val status : TextView
 
         init {
             textView = view.findViewById(R.id.itemView)
@@ -42,6 +43,7 @@ class AppliedJobListAdapter(private val dataSet: List<Job>, private val context:
             tanggal = view.findViewById(R.id.tanggalJob)
             gaji = view.findViewById(R.id.jobGaji)
             deskripsi = view.findViewById(R.id.jobDeskripsi)
+            status = view.findViewById(R.id.statusJob)
 
         }
     }
@@ -66,6 +68,16 @@ class AppliedJobListAdapter(private val dataSet: List<Job>, private val context:
         viewHolder.tanggal.text = dataSet[position].job_date
         viewHolder.gaji.text = dataSet[position].job_price
         viewHolder.deskripsi.text = dataSet[position].job_desc
+
+        if(dataSet[position].status == "0"){
+            viewHolder.status.text = "Status : On Review"
+        }else if(dataSet[position].status == "1"){
+            viewHolder.status.text = "Status : Accepted"
+        }else if(dataSet[position].status == "2"){
+            viewHolder.status.text = "Status : Rejected"
+        }else{
+            viewHolder.status.text = "Status : Unknown"
+        }
 
         Glide.with(context)
             .load(dataSet[position].job_image)
