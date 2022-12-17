@@ -33,6 +33,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('user/available/jobs',[JobController::class, 'getAvailableJob']);
     Route::get('user/posted/jobs',[JobController::class, 'getJobPosted']);
 
+    Route::post('user/update',[UserController::class, 'userUpdate']);
     Route::post('user/create_job',[JobController::class, 'createJob']);
     Route::post('user/apply_job',[UserController::class, 'applyJob']);
     Route::post('user/accept_job',[UserController::class, 'acceptJob']);

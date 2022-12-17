@@ -69,8 +69,8 @@ class UserController extends Controller
 
     public function userUpdate(Request $request)
     {
-        try {
-
+        try{
+            // check if request not null
             if($request->hasFile('image')){
                 $image_uploaded_path = 'images/user';
                 $image = $request->file('image');
@@ -78,24 +78,41 @@ class UserController extends Controller
                 $image->storeAs($image_uploaded_path, $image_name);
             }
 
-            $user = User::where('id', auth()->user()->id);
-            $user->image = $image_name;
-            $user->nama = request('nama');
-            $user->email = request('email');
-            $user->password = Hash::make(request('password'));
-            $user->tanggal_lahir = request('tanggal_lahir');
-            $user->jenis_kelamin = request('jenis_kelamin');
-            $user->alamat = request('alamat');
-            $user->no_telp = request('no_telp');
+            // find user based on auth id
+            $user = User::find(auth()->user()->id);
+            if($request->hasFile('image')){
+                $user->image = $image_name;
+            }
+            if(request('nama') != null){
+                $user->nama = request('nama');
+            }
+            if(request('email') != null){
+                $user->email = request('email');
+            }
+            if(request('password') != null){
+                $user->password = Hash::make(request('password'));
+            }
+            if(request('tanggal_lahir') != null){
+                $user->tanggal_lahir = request('tanggal_lahir');
+            }
+            if(request('jenis_kelamin') != null){
+                $user->jenis_kelamin = request('jenis_kelamin');
+            }
+            if(request('alamat') != null){
+                $user->alamat = request('alamat');
+            }
+            if(request('no_telp') != null){
+                $user->no_telp = request('no_telp');
+            }
             $user->save();
-
+        
             return response()->json([
-                'message' => 'User updated',
+                'message' => 'User updated successfully',
                 'user' => $user
             ], 201);
-        } catch (\Exception $e) {
+        }catch(\Exception $e){
             return response()->json([
-                'message' => 'User updated',
+                'message' => 'User update failed',
                 'error' => $e->getMessage()
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }

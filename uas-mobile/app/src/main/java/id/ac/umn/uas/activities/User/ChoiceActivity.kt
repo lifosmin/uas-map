@@ -26,7 +26,10 @@ class ChoiceActivity : AppCompatActivity() {
 
         val welcomeHead = findViewById<TextView>(R.id.welcomeHead)
 
-        welcomeHead.text = "Welcome, ${userObj.nama}"
+        var name = userObj.nama.split(" ")
+        var nameCap = name[0].capitalize()
+
+        welcomeHead.text = "Welcome, ${nameCap}"
 
         var buttonProvider = findViewById<Button>(R.id.buttonProvider)
         var buttonSeeker = findViewById<Button>(R.id.buttonSeeker)

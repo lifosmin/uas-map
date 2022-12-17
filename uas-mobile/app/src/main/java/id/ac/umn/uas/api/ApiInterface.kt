@@ -22,6 +22,19 @@ interface ApiInterface {
     ): Call<DefaultResponse>
 
     @Multipart
+    @POST("user/login")
+    fun updateUser(
+        @Part image: MultipartBody.Part,
+        @Part("nama") nama: RequestBody,
+        @Part("email") email: RequestBody,
+        @Part("password") password: RequestBody,
+        @Part("tanggal_lahir") tanggal_lahir: RequestBody,
+        @Part("jenis_kelamin") jenis_kelamin: RequestBody,
+        @Part("alamat") alamat: RequestBody,
+        @Part("no_telp") no_telp: RequestBody
+    ): Call<UpdateUserResponse>
+
+    @Multipart
     @POST("user/create_job")
     fun createJob(
         @Part image: MultipartBody.Part,
