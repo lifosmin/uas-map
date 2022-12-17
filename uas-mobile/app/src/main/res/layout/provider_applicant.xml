@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:layout_margin="10dp"
+    app:cardElevation="6dp">
+
+    <LinearLayout
+        android:id="@+id/itemView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:background="@drawable/white_bg_round">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:id="@+id/userId"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/userGambar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".2"
+            android:layout_gravity="center"
+            android:src="@drawable/desc"
+            android:layout_margin="5dp"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".75"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/userNama"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Budi Hartono"
+                android:textAlignment="textStart"
+                android:textSize="18dp"
+                android:textColor="@color/dark_blue"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
+                />
+
+            <TextView
+                android:id="@+id/userEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="budihartono@gmail.com"
+                android:textAlignment="textStart"
+                android:textSize="13dp"
+                android:textColor="@color/orange"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="2dp"
+                />
+
+            <TextView
+                android:id="@+id/userKontak"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="08123456789"
+                android:textAlignment="textStart"
+                android:textSize="13dp"
+                android:textColor="@color/orange"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="10dp"
+                />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/buttonDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight=".05"
+            android:text="Detail"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/dark_blue"
+            android:layout_gravity="center"
+            android:layout_margin="5dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:id="@+id/userTanggalLahir"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:id="@+id/userJenisKelamin"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:id="@+id/userAlamat"/>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

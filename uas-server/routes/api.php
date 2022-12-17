@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\JobController;
-
+use App\Http\Controllers\UserJobController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,18 +29,19 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
      // Buat job processing'
-     Route::get('user/jobs',[JobController::class, 'getJob']);
-     Route::get('user/available/jobs',[JobController::class, 'getAvailableJob']);
-     Route::get('user/posted/jobs',[JobController::class, 'getJobPosted']);
+    Route::get('user/jobs',[JobController::class, 'getJob']);
+    Route::get('user/available/jobs',[JobController::class, 'getAvailableJob']);
+    Route::get('user/posted/jobs',[JobController::class, 'getJobPosted']);
 
+    Route::post('user/create_job',[JobController::class, 'createJob']);
+    Route::post('user/apply_job',[UserController::class, 'applyJob']);
+    Route::post('user/accept_job',[UserController::class, 'acceptJob']);
+    Route::get('user/applied_job',[JobController::class, 'getAppliedJob']);
+    Route::get('user/count_applied_job',[JobController::class, 'getCountAppliedJob']);
+    Route::post('user/cancel_job',[JobController::class, 'cancelAppliedJob']);
 
-
-     Route::post('user/create_job',[JobController::class, 'createJob']);
-     Route::post('user/apply_job',[UserController::class, 'applyJob']);
-     Route::post('user/accept_job',[UserController::class, 'acceptJob']);
-
-
-    
+    Route::get('jobs/applicant/user', [UserJobController::class, 'getApplicantJob']);
+    Route::get('jobs/applicant', [JobController::class, 'getJobPostedByUser']);
 });
 
 Route::prefix('user')->group(function () {

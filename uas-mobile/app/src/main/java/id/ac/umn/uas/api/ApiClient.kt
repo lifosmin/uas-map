@@ -1,12 +1,7 @@
 package id.ac.umn.uas.api
 
 import android.content.Context
-import android.provider.SyncStateContract
-import id.ac.umn.uas.activities.LoginActivity
-import id.ac.umn.uas.activities.SignupActivity
-import id.ac.umn.uas.models.LoginResponse
 import okhttp3.OkHttpClient
-import retrofit2.Callback
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

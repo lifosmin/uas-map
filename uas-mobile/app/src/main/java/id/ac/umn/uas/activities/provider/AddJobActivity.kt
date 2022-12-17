@@ -1,12 +1,12 @@
-package id.ac.umn.uas.activities
+package id.ac.umn.uas.activities.provider
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import id.ac.umn.uas.R
 
-class JobListActivity: AppCompatActivity() {
+class AddJobActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_job_list)
+        setContentView(R.layout.activity_add_job)
     }
 }

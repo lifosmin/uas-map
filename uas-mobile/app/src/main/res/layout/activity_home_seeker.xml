@@ -41,7 +41,7 @@
         android:layout_width="match_parent"
         android:layout_marginHorizontal="20dp"
         android:layout_height="wrap_content"
-        android:text="Job : 0"
+        android:text="Applied Job : 0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -61,6 +61,6 @@
             app:layout_constraintTop_toBottomOf="@+id/buttonJobList"
             app:layout_constraintVertical_bias="0.05"
             tools:layout_editor_absoluteX="0dp"
-            tools:listitem="@layout/seeker"/>
+            tools:listitem="@layout/seeker_job"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

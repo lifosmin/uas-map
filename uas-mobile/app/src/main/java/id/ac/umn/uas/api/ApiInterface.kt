@@ -1,9 +1,6 @@
 package id.ac.umn.uas.api
 
-import android.net.Uri
-import id.ac.umn.uas.models.DefaultResponse
-import id.ac.umn.uas.models.GetJobResponse
-import id.ac.umn.uas.models.LoginResponse
+import id.ac.umn.uas.models.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -53,7 +50,24 @@ interface ApiInterface {
     @FormUrlEncoded
     @POST("user/apply_job")
     fun applyJob(
-        @Field("job_id") job_id: Integer,
-        @Header("Authorization") token: String,
-    ): Call<LoginResponse>
+        @Field("job_id") job_id: String,
+    ): Call<ApplyJobResponse>
+
+    @GET("user/applied_job")
+    fun getAppliedJob(): Call<GetJobResponse>
+
+    @GET("user/count_applied_job")
+    fun countAppliedJob(): Call<AppliedJobCountResponse>
+
+    @FormUrlEncoded
+    @POST("user/cancel_job")
+    fun cancelJob(
+        @Field("job_id") job_id: String,
+    ): Call<CancelJobResponse>
+
+//    get applicant with params job_id
+    @GET("jobs/applicant/user")
+    fun getApplicant(
+        @Query("job_id") job_id: String,
+    ): Call<GetJobApplicant>
 }

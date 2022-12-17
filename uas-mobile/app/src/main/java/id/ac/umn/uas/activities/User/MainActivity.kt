@@ -1,4 +1,4 @@
-package id.ac.umn.uas.activities
+package id.ac.umn.uas.activities.User
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

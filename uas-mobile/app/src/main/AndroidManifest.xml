@@ -15,56 +15,60 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UAS"
         tools:targetApi="31">
-        <activity android:name=".activities.JobListActivity"
+        <activity android:name=".activities.seeker.appliedjobs.DetailAppliedSeekerActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:exported="false">
         </activity>
-        <activity android:name=".activities.DetailSeekerActivity"
+        <activity android:name=".activities.seeker.appliedjobs.SeekerAppliedJobActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:exported="false">
         </activity>
-        <activity android:name=".activities.SeekerActivity"
+        <activity android:name=".activities.seeker.DetailSeekerActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:exported="false">
         </activity>
-        <activity android:name=".activities.AddJobActivity"
+        <activity android:name=".activities.seeker.SeekerActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:exported="false">
         </activity>
-        <activity android:name=".activities.TrackDetailSeekerActivity"
+        <activity android:name=".activities.provider.AddJobActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:exported="false">
         </activity>
-        <activity android:name=".activities.TrackSeekerActivity"
+        <activity android:name=".activities.provider.TrackDetailSeekerActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:exported="false">
         </activity>
-        <activity android:name=".activities.DetailProviderActivity"
+        <activity android:name=".activities.provider.TrackSeekerActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:exported="false">
         </activity>
-        <activity android:name=".activities.ProviderActivity"
+        <activity android:name=".activities.provider.DetailProviderActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:exported="false">
         </activity>
-        <activity android:name=".activities.ChoiceActivity"
+        <activity android:name=".activities.provider.ProviderActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:exported="false">
         </activity>
-        <activity android:name=".activities.LoginActivity"
+        <activity android:name=".activities.User.ChoiceActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:exported="false">
         </activity>
-        <activity android:name=".activities.SignupActivity"
+        <activity android:name=".activities.User.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:exported="false">
         </activity>
-        <activity android:name=".activities.ProfileActivity"
+        <activity android:name=".activities.User.SignupActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:exported="false">
+        </activity>
+        <activity android:name=".activities.User.ProfileActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:exported="false">
         </activity>
         <activity
-            android:name=".activities.MainActivity"
+            android:name=".activities.User.MainActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:exported="true">
             <intent-filter>

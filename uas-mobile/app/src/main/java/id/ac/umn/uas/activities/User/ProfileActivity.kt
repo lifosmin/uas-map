@@ -1,4 +1,4 @@
-package id.ac.umn.uas.activities
+package id.ac.umn.uas.activities.User
 
 import android.app.DatePickerDialog
 import android.content.Intent
@@ -15,15 +15,8 @@ import com.google.gson.Gson
 import de.hdodenhof.circleimageview.CircleImageView
 import id.ac.umn.uas.R
 import id.ac.umn.uas.api.ApiClient
-import id.ac.umn.uas.models.DefaultResponse
 import id.ac.umn.uas.models.User
-import okhttp3.MediaType
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import retrofit2.Call
-import retrofit2.Response
 import java.io.ByteArrayOutputStream
-import java.io.File
 import java.util.*
 
 class ProfileActivity : AppCompatActivity() {

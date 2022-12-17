@@ -92,7 +92,94 @@ class JobController extends Controller
 
     public function getAvailableJob() {
         try {
-            $jobs = Job::where('created_by', '!=', auth()->user()->id)->get();
+            $jobs_id = User::find(auth()->user()->id)->applyJob->pluck('job_id')->toArray();
+            $jobs = Job::where('created_by', '!=', auth()->user()->id)->whereNotIn('id', $jobs_id)->get();
+            foreach ($jobs as $job){
+                $job->job_image = asset('storage/images/job/' . $job->job_image);
+            }
+            return response()->json([
+                'message' => 'Job get succesfully',
+                'job' => $jobs
+            ], Response::HTTP_OK);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Job get failed',
+                'error' => $e->getMessage()
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public function getAppliedJob() {
+        try {
+            $jobs_id = User::find(auth()->user()->id)->applyJob->pluck('job_id')->toArray();
+            $jobs = Job::whereIn('id', $jobs_id)->get();
+            foreach ($jobs as $job){
+                $job->job_image = asset('storage/images/job/' . $job->job_image);
+            }
+            return response()->json([
+                'message' => 'Job get succesfully',
+                'job' => $jobs
+            ], Response::HTTP_OK);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Job get failed',
+                'error' => $e->getMessage()
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public function getCountAppliedJob(){
+        try {
+            $jobs_id = User::find(auth()->user()->id)->applyJob->pluck('job_id')->toArray();
+            $count = Job::whereIn('id', $jobs_id)->count();
+            return response()->json([
+                'message' => 'Job get succesfully',
+                'count' => $count
+            ], Response::HTTP_OK);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Job get failed',
+                'error' => $e->getMessage()
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public function cancelAppliedJob(){
+        $validated = request()->validate([
+            "job_id" => "integer|required",
+        ]);
+
+        try {
+            // get $user_Job by using authorization sanctum token and job_id from request
+            $user_job = UserJob::where('took_by', auth()->user()->id)->where('job_id', $validated['job_id'])->first();
+
+            // if $userjob status is 0, user can still delete
+            if($user_job->status == 0){
+                $user_job->delete();
+                return response()->json([
+                    'message' => 'Job cancelled succesfully',
+                ], Response::HTTP_OK);
+            } else {
+                return response()->json([
+                    'message' => 'Job cancelled failed',
+                    'error' => 'Job already approved'
+                ], Response::HTTP_INTERNAL_SERVER_ERROR);
+            }
+
+            return response()->json([
+                'message' => 'Job cancelled succesfully',
+            ], Response::HTTP_OK);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Job cancelled failed',
+                'error' => $e->getMessage()
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public function getJobPostedByUser() {
+        try{
+            $jobs = Job::where('created_by', auth()->user()->id)->get();
             foreach ($jobs as $job){
                 $job->job_image = asset('storage/images/job/' . $job->job_image);
             }

@@ -1,8 +1,7 @@
-package id.ac.umn.uas.activities
+package id.ac.umn.uas.activities.User
 
 import android.app.DatePickerDialog
 import android.content.Intent
-import android.database.Cursor
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
@@ -12,6 +11,7 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import de.hdodenhof.circleimageview.CircleImageView
 import id.ac.umn.uas.R
+import id.ac.umn.uas.activities.User.LoginActivity
 import id.ac.umn.uas.api.ApiClient
 import id.ac.umn.uas.models.DefaultResponse
 import okhttp3.MediaType
