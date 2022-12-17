@@ -5,7 +5,6 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
@@ -14,9 +13,7 @@ import de.hdodenhof.circleimageview.CircleImageView
 import id.ac.umn.uas.R
 import id.ac.umn.uas.models.Job
 import com.bumptech.glide.request.RequestOptions
-import id.ac.umn.uas.activities.provider.DetailProviderActivity
-import id.ac.umn.uas.activities.seeker.DetailSeekerActivity
-import id.ac.umn.uas.models.User
+import id.ac.umn.uas.activities.provider.DetailProviderJobActivity
 
 class JobProviderAdapter(private val dataSet: List<Job>, private val context: Context) :
     RecyclerView.Adapter<JobProviderAdapter.ViewHolder>() {
@@ -70,20 +67,20 @@ class JobProviderAdapter(private val dataSet: List<Job>, private val context: Co
         viewHolder.gaji.text = dataSet[position].job_price
         viewHolder.deskripsi.text = dataSet[position].job_desc
 
-
         Glide.with(context)
             .load(dataSet[position].job_image)
             .apply(RequestOptions().override(100, 100))
             .into(viewHolder.image)
 
+
         viewHolder.textView.setOnClickListener {
-            val intent = Intent(context, DetailProviderActivity::class.java)
-            intent.putExtra("id", viewHolder.id.text.toString())
-            intent.putExtra("judul", viewHolder.judul.text.toString())
-            intent.putExtra("lokasi", viewHolder.lokasi.text.toString())
-            intent.putExtra("tanggal", viewHolder.tanggal.text.toString())
-            intent.putExtra("gaji", viewHolder.gaji.text.toString())
-            intent.putExtra("deskripsi", viewHolder.deskripsi.text.toString())
+            val intent = Intent(context, DetailProviderJobActivity::class.java)
+            intent.putExtra("id", dataSet[position].id.toString())
+            intent.putExtra("judul", dataSet[position].job_title)
+            intent.putExtra("lokasi", dataSet[position].job_location)
+            intent.putExtra("tanggal", dataSet[position].job_date)
+            intent.putExtra("gaji", dataSet[position].job_price)
+            intent.putExtra("deskripsi", dataSet[position].job_desc)
             intent.putExtra("image", dataSet[position].job_image)
             context.startActivity(intent)
         }

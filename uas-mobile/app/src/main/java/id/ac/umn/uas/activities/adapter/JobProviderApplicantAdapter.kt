@@ -8,18 +8,16 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import de.hdodenhof.circleimageview.CircleImageView
 import id.ac.umn.uas.R
-import id.ac.umn.uas.models.Job
 import com.bumptech.glide.request.RequestOptions
-import id.ac.umn.uas.activities.provider.DetailProviderActivity
-import id.ac.umn.uas.activities.seeker.DetailSeekerActivity
+import id.ac.umn.uas.activities.provider.TrackDetailSeekerActivity
+import id.ac.umn.uas.activities.provider.TrackSeekerActivity
 import id.ac.umn.uas.models.User
 
-class JobProviderApplicantAdapter(private val dataSet: List<User>, private val context: Context) :
+class JobProviderApplicantAdapter(private val dataSet: List<User>, private val jobId: String, private val context: Context) :
     RecyclerView.Adapter<JobProviderApplicantAdapter.ViewHolder>() {
 
     /**
@@ -83,7 +81,7 @@ class JobProviderApplicantAdapter(private val dataSet: List<User>, private val c
             .into(viewHolder.image)
 
         viewHolder.btnDetail.setOnClickListener {
-            val intent = Intent(context, DetailProviderActivity::class.java)
+            val intent = Intent(context, TrackDetailSeekerActivity::class.java)
             intent.putExtra("id", user)
             intent.putExtra("nama", dataSet[position].nama)
             intent.putExtra("email", dataSet[position].email)
@@ -91,6 +89,8 @@ class JobProviderApplicantAdapter(private val dataSet: List<User>, private val c
             intent.putExtra("tanggal", dataSet[position].tanggal_lahir)
             intent.putExtra("kelamin", dataSet[position].jenis_kelamin)
             intent.putExtra("alamat", dataSet[position].alamat)
+            intent.putExtra("image", dataSet[position].image)
+            intent.putExtra("job_id", jobId)
             context.startActivity(intent)
         }
     }

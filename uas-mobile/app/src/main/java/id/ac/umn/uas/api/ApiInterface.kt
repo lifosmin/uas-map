@@ -21,6 +21,16 @@ interface ApiInterface {
         @Part("no_telp") no_telp: RequestBody
     ): Call<DefaultResponse>
 
+    @Multipart
+    @POST("user/create_job")
+    fun createJob(
+        @Part image: MultipartBody.Part,
+        @Part("judul") judul: RequestBody,
+        @Part("deskripsi") deskripsi: RequestBody,
+        @Part("gaji") gaji: RequestBody,
+        @Part("lokasi") lokasi: RequestBody,
+    ): Call<CreateJobResponse>
+
     @FormUrlEncoded
     @POST("user/signin")
 //    if login info is correct call loginresponse, else call default response
@@ -28,18 +38,6 @@ interface ApiInterface {
         @Field("email") email: String,
         @Field("password") password: String,
     ): Call<LoginResponse>
-
-    @FormUrlEncoded
-    @POST("user/create_job")
-//    if login info is correct call loginresponse, else call default response
-    fun createJob(
-        @Field("job_title") job_title: String,
-        @Field("job_desc") job_desc: String,
-        @Field("job_date") job_date: String,
-        @Field("job_price") job_price: Integer,
-        @Header("Authorization") token: String,
-    ): Call<LoginResponse>
-
 
     @GET("user")
     fun getUser(): Call<DefaultResponse>
@@ -70,4 +68,15 @@ interface ApiInterface {
     fun getApplicant(
         @Query("job_id") job_id: String,
     ): Call<GetJobApplicant>
+
+    @FormUrlEncoded
+    @POST("user/accept_job")
+    fun acceptJob(
+        @Field("job_id") job_id: String,
+        @Field("user_id") user_id: String,
+        @Field("action") action: String,
+    ): Call<ApproveHiringResponse>
+
+    @GET("jobs/applicant")
+    fun getJobApplicant(): Call<GetJobResponse>
 }

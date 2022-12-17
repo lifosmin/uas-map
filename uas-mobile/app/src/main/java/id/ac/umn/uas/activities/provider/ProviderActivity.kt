@@ -4,6 +4,7 @@ import id.ac.umn.uas.activities.adapter.JobProviderAdapter
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -40,6 +41,12 @@ class ProviderActivity: AppCompatActivity() {
             startActivity(intent)
         }
 
+        val addJob = findViewById<Button>(R.id.buttonAddJob)
+        addJob.setOnClickListener {
+            val intent = Intent(this, AddJobActivity::class.java)
+            startActivity(intent)
+        }
+
         apiClient = ApiClient()
 
 //        fetchToken() from sessionManager
@@ -51,8 +58,30 @@ class ProviderActivity: AppCompatActivity() {
         val user = sp.getString("user", null)
         val userObj = Gson().fromJson(user, User::class.java)
 
-//        get job data from api
-        apiClient.getApiInterface(this).getJob()
+        val userImage = findViewById<CircleImageView>(R.id.profile_image)
+        val welcomeHead = findViewById<TextView>(R.id.welcomeHead)
+
+        welcomeHead.text = "Welcome Back, ${userObj?.nama}"
+
+        val imageUrl = userObj?.image
+
+        Glide.with(applicationContext)
+            .load(imageUrl)
+            .into(userImage)
+    }
+
+    private fun init() {
+        sp = getSharedPreferences("sharedPrefs", MODE_PRIVATE)
+        var job = sp.getString("applicant", null)
+
+        val jobObj = Gson().fromJson(job, GetJobResponse::class.java)
+
+        adapter = JobProviderAdapter(jobObj.job, this)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        apiClient.getApiInterface(this).getJobApplicant()
             .enqueue(object: retrofit2.Callback<GetJobResponse> {
                 override fun onFailure(call: Call<GetJobResponse>, t: Throwable) {
                     Toast.makeText(this@ProviderActivity, t.message, Toast.LENGTH_LONG).show()
@@ -82,25 +111,5 @@ class ProviderActivity: AppCompatActivity() {
                     }
                 }
             })
-
-        val userImage = findViewById<CircleImageView>(R.id.profile_image)
-        val welcomeHead = findViewById<TextView>(R.id.welcomeHead)
-
-        welcomeHead.text = "Welcome Back, ${userObj?.nama}"
-
-        val imageUrl = userObj?.image
-
-        Glide.with(applicationContext)
-            .load(imageUrl)
-            .into(userImage)
-    }
-
-    private fun init() {
-        sp = getSharedPreferences("sharedPrefs", MODE_PRIVATE)
-        var job = sp.getString("applicant", null)
-
-        val jobObj = Gson().fromJson(job, GetJobResponse::class.java)
-
-        adapter = JobProviderAdapter(jobObj.job, this)
     }
 }

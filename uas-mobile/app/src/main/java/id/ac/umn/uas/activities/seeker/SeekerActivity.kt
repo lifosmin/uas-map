@@ -132,4 +132,94 @@ class SeekerActivity: AppCompatActivity() {
 
         adapter = JobAdapter(jobObj.job, this)
     }
+
+    override fun onResume() {
+        super.onResume()
+        var profile = findViewById<CircleImageView>(R.id.profile_image)
+
+        profile.setOnClickListener {
+            val intent = Intent(this, ProfileActivity::class.java)
+            startActivity(intent)
+        }
+
+        apiClient = ApiClient()
+
+//        fetchToken() from sessionManager
+        sessionManager = SessionManager(this)
+        val token = sessionManager.fetchAuthToken()
+
+//        check if sharepreferences myPrefs exist
+        sp = getSharedPreferences("sharedPrefs", MODE_PRIVATE)
+        val user = sp.getString("user", null)
+        val userObj = Gson().fromJson(user, User::class.java)
+
+//        get job data from api
+        apiClient.getApiInterface(this).getJob()
+            .enqueue(object: retrofit2.Callback<GetJobResponse> {
+                override fun onFailure(call: Call<GetJobResponse>, t: Throwable) {
+                    Toast.makeText(this@SeekerActivity, t.message, Toast.LENGTH_LONG).show()
+                }
+
+                override fun onResponse(
+                    call: Call<GetJobResponse>,
+                    response: Response<GetJobResponse>
+                ) {
+                    if(response.code() == 200) {
+                        val job = response.body()
+
+                        val gson = Gson()
+                        val json = gson.toJson(job)
+
+                        val sharedPreferences = getSharedPreferences("sharedPrefs", MODE_PRIVATE)
+                        val editor = sharedPreferences.edit()
+                        editor.putString("jobs", json)
+                        editor.commit()
+
+                        init()
+
+                        recyclerView = findViewById(R.id.seekerRecyclerView)
+                        recyclerView.layoutManager = LinearLayoutManager(this@SeekerActivity)
+                        recyclerView.setHasFixedSize(true)
+                        recyclerView.adapter = adapter
+                    }
+                }
+            })
+
+        val userImage = findViewById<CircleImageView>(R.id.profile_image)
+        val welcomeHead = findViewById<TextView>(R.id.welcomeHead)
+
+        welcomeHead.text = "Welcome Back, ${userObj?.nama}"
+
+        apiClient.getApiInterface(this).countAppliedJob()
+            .enqueue(object: retrofit2.Callback<AppliedJobCountResponse> {
+                override fun onFailure(call: Call<AppliedJobCountResponse>, t: Throwable) {
+                    Toast.makeText(this@SeekerActivity, t.message, Toast.LENGTH_LONG).show()
+                }
+
+                override fun onResponse(
+                    call: Call<AppliedJobCountResponse>,
+                    response: Response<AppliedJobCountResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        val appliedJobCount = response.body()?.count
+                        val appliedJobCountText = findViewById<TextView>(R.id.buttonJobList)
+                        appliedJobCountText.text = "Applied Job : $appliedJobCount"
+                    }
+                }
+            })
+
+        val appliedJobCountText = findViewById<TextView>(R.id.buttonJobList)
+        appliedJobCountText.setOnClickListener {
+            val intent = Intent(this, SeekerAppliedJobActivity::class.java)
+            startActivity(intent)
+        }
+
+//        change userImage with userObj image upload from api via Bitmap
+        val imageUrl = userObj?.image
+
+        Glide.with(this)
+            .load(imageUrl)
+            .into(userImage)
+
+    }
 }

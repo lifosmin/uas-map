@@ -233,12 +233,16 @@ class UserController extends Controller
 
     public function acceptJob(Request $request){
         $validated = $request->validate([
-            "user_job_id" => "integer|required",
+            "job_id" => "integer|required",
+            "user_id" => "integer|required",
             "action" => "string|in:confirm,reject"
         ]);
         
-        $user_job = UserJob::findOrFail($validated['user_job_id']);
-        //biar orang ga ngambil job 2 kali
+
+        $user_job = UserJob::where('job_id', $validated['job_id'])
+            ->where('took_by', $validated['user_id'])
+            ->first();
+
         if($validated["action"]=="confirm") {
             $user_job->status = 1;
             $user_job->save();

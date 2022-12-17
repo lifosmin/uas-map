@@ -62,7 +62,6 @@ class TrackSeekerActivity: AppCompatActivity() {
                 ) {
                     if(response.code() == 200) {
                         val data = response.body()
-                        Log.d("Data", data.toString())
 
                         val gson = Gson()
                         val json = gson.toJson(data)
@@ -90,6 +89,59 @@ class TrackSeekerActivity: AppCompatActivity() {
 
         val userObj = Gson().fromJson(user, GetJobApplicant::class.java)
 
-        adapter = JobProviderApplicantAdapter(userObj.users, this)
+        var jobId = intent.getStringExtra("id")
+        jobId = jobId.toString()
+
+        adapter = JobProviderApplicantAdapter(userObj.users, jobId, this)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        apiClient = ApiClient()
+        gson = Gson()
+
+        //        fetchToken() from sessionManager
+        sessionManager = SessionManager(this)
+        val token = sessionManager.fetchAuthToken()
+
+        //        check if sharepreferences myPrefs exist
+        sp = getSharedPreferences("sharedPrefs", MODE_PRIVATE)
+        val user = sp.getString("user", null)
+        val userObj = gson?.fromJson(user, User::class.java)
+
+        var jobId = intent.getStringExtra("id")
+        jobId = jobId.toString()
+
+        //        get applicant data from api
+        apiClient.getApiInterface(this).getApplicant(jobId)
+            .enqueue(object: retrofit2.Callback<GetJobApplicant> {
+                override fun onFailure(call: Call<GetJobApplicant>, t: Throwable) {
+                    Toast.makeText(this@TrackSeekerActivity, t.message, Toast.LENGTH_LONG).show()
+                }
+
+                override fun onResponse(
+                    call: Call<GetJobApplicant>,
+                    response: Response<GetJobApplicant>
+                ) {
+                    if(response.code() == 200) {
+                        val data = response.body()
+
+                        val gson = Gson()
+                        val json = gson.toJson(data)
+
+                        val sharedPreferences = getSharedPreferences("sharedPrefs", MODE_PRIVATE)
+                        val editor = sharedPreferences.edit()
+                        editor.putString("applicantList", json)
+                        editor.commit()
+
+                        init()
+
+                        recyclerView = findViewById(R.id.recyclerview)
+                        recyclerView.layoutManager = LinearLayoutManager(this@TrackSeekerActivity)
+                        recyclerView.setHasFixedSize(true)
+                        recyclerView.adapter = adapter
+                    }
+                }
+            })
     }
 }
