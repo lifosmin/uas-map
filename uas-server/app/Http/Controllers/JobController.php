@@ -73,14 +73,14 @@ class JobController extends Controller
         try {
             $jobs_id = User::find(auth()->user()->id)->applyJob->pluck('job_id')->toArray();
             foreach ($jobs_id as $job){
-                $jobs[] = Job::find($job);
-                $count[] = UserJob::where('job_id', $job)->count();
+                $jobfind = Job::find($job);
+                $jobfind->count = UserJob::where('job_id', $job)->count();
+                $jobs[] = $jobfind;
             }
             
             return response()->json([
                 'message' => 'Job get succesfully',
                 'job' => $jobs,
-                'count' => $count
             ], Response::HTTP_OK);
         } catch (\Exception $e) {
             return response()->json([
@@ -190,6 +190,61 @@ class JobController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'message' => 'Job get failed',
+                'error' => $e->getMessage()
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public function getAppliedJob() {
+        try {
+            $jobs = User::find(auth()->user()->id)->applyJob->pluck('job_id')->toArray();
+            $userjobs = User::find(auth()->user()->id)->applyJob->pluck('id')->toArray();
+            $i = 0;
+            foreach ($jobs as $job){
+                $jobfind = Job::find($job);
+                $jobfind->review_status = UserJob::where('id', $userjobs[$i])->get('status')->first()->status;
+                $job_array[] = $jobfind;
+                $i++;
+            }
+            foreach($job_array as $job) {
+                $job['job_image'] = asset('storage/images/job'.$job['job_image']);
+                
+            }
+
+            return response()->json([
+                'message' => 'Job get succesfully',
+                'job' => $job_array,
+
+            ], Response::HTTP_OK);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Job get failed',
+                'error' => $e->getMessage()
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public function getAppliedUser(Request $request) {
+
+        try {
+            $user_id = Job::find($request["job_id"])->applyJob->pluck('took_by')->toArray();
+            foreach ($user_id as $user){
+
+                $user_array[] = User::find($user);
+                
+            }
+            foreach($user_array as $user) {
+                $user['image'] = asset('storage/images/job'.$user['image']);
+                
+            }
+
+            return response()->json([
+                'message' => 'User get succesfully',
+                'users' => $user_array
+            ], Response::HTTP_OK);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'User get failed',
                 'error' => $e->getMessage()
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
