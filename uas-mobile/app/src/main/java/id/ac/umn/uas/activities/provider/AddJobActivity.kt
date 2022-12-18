@@ -112,17 +112,17 @@ class AddJobActivity: AppCompatActivity() {
             apiClient.getApiInterface(this).createJob(image, judul, detail, gaji, alamat).enqueue(object : retrofit2.Callback<CreateJobResponse> {
                 override fun onResponse(call: Call<CreateJobResponse>, response: Response<CreateJobResponse>) {
                     if (response.isSuccessful) {
-                        Toast.makeText(this@AddJobActivity, "Berhasil menambahkan job", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@AddJobActivity, response.body()?.message, Toast.LENGTH_SHORT).show()
                         val intent = Intent(this@AddJobActivity, ProviderActivity::class.java)
                         startActivity(intent)
                         finish()
                     } else {
-                        Toast.makeText(this@AddJobActivity, "Gagal menambahkan job", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@AddJobActivity,  response.errorBody()?.string() , Toast.LENGTH_SHORT).show()
                     }
                 }
 
                 override fun onFailure(call: Call<CreateJobResponse>, t: Throwable) {
-                    Toast.makeText(this@AddJobActivity, "Gagal menambahkan job", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@AddJobActivity, t.message, Toast.LENGTH_SHORT).show()
                 }
             })
         }
@@ -247,17 +247,17 @@ class AddJobActivity: AppCompatActivity() {
             apiClient.getApiInterface(this).createJob(image, judul, detail, gaji, alamat).enqueue(object : retrofit2.Callback<CreateJobResponse> {
                 override fun onResponse(call: Call<CreateJobResponse>, response: Response<CreateJobResponse>) {
                     if (response.isSuccessful) {
-                        Toast.makeText(this@AddJobActivity, "Berhasil menambahkan job", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@AddJobActivity, response.body()?.message, Toast.LENGTH_SHORT).show()
                         val intent = Intent(this@AddJobActivity, ProviderActivity::class.java)
                         startActivity(intent)
                         finish()
                     } else {
-                        Toast.makeText(this@AddJobActivity, "Gagal menambahkan job", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@AddJobActivity,  response.errorBody()?.string() , Toast.LENGTH_SHORT).show()
                     }
                 }
 
                 override fun onFailure(call: Call<CreateJobResponse>, t: Throwable) {
-                    Toast.makeText(this@AddJobActivity, "Gagal menambahkan job", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@AddJobActivity, t.message, Toast.LENGTH_SHORT).show()
                 }
             })
         }

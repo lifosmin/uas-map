@@ -96,8 +96,15 @@ class TrackDetailSeekerActivity: AppCompatActivity() {
         btnHire.setOnClickListener {
             apiClient.getApiInterface(this).acceptJob(tempJobId, tempUserId, "confirm")
                 .enqueue(object : retrofit2.Callback<ApproveHiringResponse> {
-                    override fun onFailure(call: retrofit2.Call<ApproveHiringResponse>, t: Throwable) {
-                        Toast.makeText(this@TrackDetailSeekerActivity, "User gagal dihire", Toast.LENGTH_SHORT).show()
+                    override fun onFailure(
+                        call: retrofit2.Call<ApproveHiringResponse>,
+                        t: Throwable
+                    ) {
+                        Toast.makeText(
+                            this@TrackDetailSeekerActivity,
+                            t.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
 
                     override fun onResponse(
@@ -105,8 +112,8 @@ class TrackDetailSeekerActivity: AppCompatActivity() {
                         response: retrofit2.Response<ApproveHiringResponse>
                     ) {
                         if (response.isSuccessful) {
-                            val data = "User berhasil dihire"
-                            Toast.makeText(this@TrackDetailSeekerActivity, data, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@TrackDetailSeekerActivity, response.body()?.message , Toast.LENGTH_SHORT)
+                                .show()
                             finish()
                         }
                     }
@@ -115,8 +122,15 @@ class TrackDetailSeekerActivity: AppCompatActivity() {
         btnReject.setOnClickListener {
             apiClient.getApiInterface(this).acceptJob(tempJobId, tempUserId, "reject")
                 .enqueue(object : retrofit2.Callback<ApproveHiringResponse> {
-                    override fun onFailure(call: retrofit2.Call<ApproveHiringResponse>, t: Throwable) {
-                        Toast.makeText(this@TrackDetailSeekerActivity, "User gagal direject", Toast.LENGTH_SHORT).show()
+                    override fun onFailure(
+                        call: retrofit2.Call<ApproveHiringResponse>,
+                        t: Throwable
+                    ) {
+                        Toast.makeText(
+                            this@TrackDetailSeekerActivity,
+                            t.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
 
                     override fun onResponse(
@@ -124,8 +138,8 @@ class TrackDetailSeekerActivity: AppCompatActivity() {
                         response: retrofit2.Response<ApproveHiringResponse>
                     ) {
                         if (response.isSuccessful) {
-                            val data = "User berhasil direject"
-                            Toast.makeText(this@TrackDetailSeekerActivity, data, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@TrackDetailSeekerActivity, response.body()?.message, Toast.LENGTH_SHORT)
+                                .show()
                             finish()
                         }
                     }
@@ -214,7 +228,7 @@ class TrackDetailSeekerActivity: AppCompatActivity() {
                     ) {
                         Toast.makeText(
                             this@TrackDetailSeekerActivity,
-                            "User gagal dihire",
+                            t.message,
                             Toast.LENGTH_SHORT
                         ).show()
                     }
@@ -224,8 +238,7 @@ class TrackDetailSeekerActivity: AppCompatActivity() {
                         response: retrofit2.Response<ApproveHiringResponse>
                     ) {
                         if (response.isSuccessful) {
-                            val data = "User berhasil dihire"
-                            Toast.makeText(this@TrackDetailSeekerActivity, data, Toast.LENGTH_SHORT)
+                            Toast.makeText(this@TrackDetailSeekerActivity, response.body()?.message , Toast.LENGTH_SHORT)
                                 .show()
                             finish()
                         }
@@ -241,7 +254,7 @@ class TrackDetailSeekerActivity: AppCompatActivity() {
                     ) {
                         Toast.makeText(
                             this@TrackDetailSeekerActivity,
-                            "User gagal direject",
+                            t.message,
                             Toast.LENGTH_SHORT
                         ).show()
                     }
@@ -251,8 +264,7 @@ class TrackDetailSeekerActivity: AppCompatActivity() {
                         response: retrofit2.Response<ApproveHiringResponse>
                     ) {
                         if (response.isSuccessful) {
-                            val data = "User berhasil direject"
-                            Toast.makeText(this@TrackDetailSeekerActivity, data, Toast.LENGTH_SHORT)
+                            Toast.makeText(this@TrackDetailSeekerActivity, response.body()?.message, Toast.LENGTH_SHORT)
                                 .show()
                             finish()
                         }

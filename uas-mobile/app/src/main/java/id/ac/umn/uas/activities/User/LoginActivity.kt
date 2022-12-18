@@ -67,6 +67,7 @@ class LoginActivity : AppCompatActivity() {
                                     apiClient.getApiInterface(this@LoginActivity).getUser()
                                         .enqueue(object : retrofit2.Callback<DefaultResponse> {
                                             override fun onFailure(call: retrofit2.Call<DefaultResponse>, t: Throwable) {
+                                                Toast.makeText(this@LoginActivity, t.message, Toast.LENGTH_LONG).show()
                                                 t.printStackTrace()
                                             }
 
@@ -94,15 +95,14 @@ class LoginActivity : AppCompatActivity() {
 //                                                  Pass User and Welcome data to next activity
                                                     startActivity(intent)
                                                 } else {
-                                                    val jObjError = JSONObject(response.errorBody()?.string())
-                                                    Toast.makeText(this@LoginActivity, jObjError.getString("message"), Toast.LENGTH_LONG).show()
+                                                    Toast.makeText(this@LoginActivity, response.errorBody()?.string(), Toast.LENGTH_LONG).show()
                                                 }
                                             }
                                         })
                                 }
                             }
                         } else if(response.code() == 401){
-                            Toast.makeText(this@LoginActivity, "Email atau password salah", Toast.LENGTH_LONG).show()
+                            Toast.makeText(this@LoginActivity, response.errorBody()?.string() , Toast.LENGTH_LONG).show()
                         }
                     }
                 })
@@ -188,15 +188,14 @@ class LoginActivity : AppCompatActivity() {
 //                                                  Pass User and Welcome data to next activity
                                                     startActivity(intent)
                                                 } else {
-                                                    val jObjError = JSONObject(response.errorBody()?.string())
-                                                    Toast.makeText(this@LoginActivity, jObjError.getString("message"), Toast.LENGTH_LONG).show()
+                                                    Toast.makeText(this@LoginActivity, response.errorBody()?.string(), Toast.LENGTH_LONG).show()
                                                 }
                                             }
                                         })
                                 }
                             }
                         } else if(response.code() == 401){
-                            Toast.makeText(this@LoginActivity, "Email atau password salah", Toast.LENGTH_LONG).show()
+                            Toast.makeText(this@LoginActivity, response.errorBody()?.string() , Toast.LENGTH_LONG).show()
                         }
                     }
                 })

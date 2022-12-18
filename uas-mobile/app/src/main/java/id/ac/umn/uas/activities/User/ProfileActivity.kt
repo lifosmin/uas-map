@@ -57,13 +57,13 @@ class ProfileActivity : AppCompatActivity() {
             apiClient.getApiInterface(this).logoutUser().enqueue(object: retrofit2.Callback<LogoutResponse> {
                 override fun onResponse(call: Call<LogoutResponse>, response: Response<LogoutResponse>) {
                     if(response.isSuccessful) {
-                        Toast.makeText(this@ProfileActivity, "Logout Berhasil!", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@ProfileActivity, response.body()?.message , Toast.LENGTH_LONG).show()
                         val intent = Intent(this@ProfileActivity, LoginActivity::class.java)
                         startActivity(intent)
                         finishAffinity()
                     } else {
                         try {
-                            Toast.makeText(this@ProfileActivity, response.errorBody()!!.string(), Toast.LENGTH_LONG).show()
+                            Toast.makeText(this@ProfileActivity, response.errorBody()?.string(), Toast.LENGTH_LONG).show()
                         } catch (e: IOException) {
                             e.printStackTrace()
                         }
@@ -139,12 +139,12 @@ class ProfileActivity : AppCompatActivity() {
             apiClient.getApiInterface(this).updateUser(nama, email, password, tanggalLahir, jenisKelamin, alamat, noTelp).enqueue(object: retrofit2.Callback<UpdateUserResponse> {
                 override fun onResponse(call: Call<UpdateUserResponse>, response: Response<UpdateUserResponse>) {
                     if(response.isSuccessful) {
-                        Toast.makeText(this@ProfileActivity, "Update User Berhasil!", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@ProfileActivity, response.body()?.message , Toast.LENGTH_LONG).show()
                         val intent = Intent(this@ProfileActivity, LoginActivity::class.java)
                         startActivity(intent)
                     } else {
                         try {
-                            Toast.makeText(this@ProfileActivity, response.errorBody()!!.string(), Toast.LENGTH_LONG).show()
+                            Toast.makeText(this@ProfileActivity, response.errorBody()?.string() , Toast.LENGTH_LONG).show()
                         } catch (e: IOException) {
                             e.printStackTrace()
                         }
@@ -182,13 +182,13 @@ class ProfileActivity : AppCompatActivity() {
             apiClient.getApiInterface(this).logoutUser().enqueue(object: retrofit2.Callback<LogoutResponse> {
                 override fun onResponse(call: Call<LogoutResponse>, response: Response<LogoutResponse>) {
                     if(response.isSuccessful) {
-                        Toast.makeText(this@ProfileActivity, "Logout Berhasil!", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@ProfileActivity, response.body()?.message , Toast.LENGTH_LONG).show()
                         val intent = Intent(this@ProfileActivity, LoginActivity::class.java)
                         startActivity(intent)
                         finish()
                     } else {
                         try {
-                            Toast.makeText(this@ProfileActivity, response.errorBody()!!.string(), Toast.LENGTH_LONG).show()
+                            Toast.makeText(this@ProfileActivity, response.errorBody()?.string(), Toast.LENGTH_LONG).show()
                         } catch (e: IOException) {
                             e.printStackTrace()
                         }
@@ -264,12 +264,12 @@ class ProfileActivity : AppCompatActivity() {
             apiClient.getApiInterface(this).updateUser(nama, email, password, tanggalLahir, jenisKelamin, alamat, noTelp).enqueue(object: retrofit2.Callback<UpdateUserResponse> {
                 override fun onResponse(call: Call<UpdateUserResponse>, response: Response<UpdateUserResponse>) {
                     if(response.isSuccessful) {
-                        Toast.makeText(this@ProfileActivity, "Update User Berhasil!", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@ProfileActivity, response.body()?.message , Toast.LENGTH_LONG).show()
                         val intent = Intent(this@ProfileActivity, LoginActivity::class.java)
                         startActivity(intent)
                     } else {
                         try {
-                            Toast.makeText(this@ProfileActivity, response.errorBody()!!.string(), Toast.LENGTH_LONG).show()
+                            Toast.makeText(this@ProfileActivity, response.errorBody()?.string() , Toast.LENGTH_LONG).show()
                         } catch (e: IOException) {
                             e.printStackTrace()
                         }

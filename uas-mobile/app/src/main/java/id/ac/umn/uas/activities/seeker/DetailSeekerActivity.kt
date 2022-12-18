@@ -66,11 +66,11 @@ class DetailSeekerActivity: AppCompatActivity() {
                         response: Response<ApplyJobResponse>
                     ) {
                         if (response.isSuccessful) {
-                            Toast.makeText(this@DetailSeekerActivity, "Berhasil apply", Toast.LENGTH_LONG).show()
+                            Toast.makeText(this@DetailSeekerActivity, response.body()?.message, Toast.LENGTH_LONG).show()
                             val intent = Intent(this@DetailSeekerActivity, SeekerActivity::class.java)
                             startActivity(intent)
                         } else {
-                            Toast.makeText(this@DetailSeekerActivity, "Gagal apply", Toast.LENGTH_LONG).show()
+                            Toast.makeText(this@DetailSeekerActivity, response.errorBody()?.string() , Toast.LENGTH_LONG).show()
                         }
                     }
                 })
@@ -124,11 +124,11 @@ class DetailSeekerActivity: AppCompatActivity() {
                         response: Response<ApplyJobResponse>
                     ) {
                         if (response.isSuccessful) {
-                            Toast.makeText(this@DetailSeekerActivity, "Berhasil apply", Toast.LENGTH_LONG).show()
+                            Toast.makeText(this@DetailSeekerActivity, response.body()?.message, Toast.LENGTH_LONG).show()
                             val intent = Intent(this@DetailSeekerActivity, SeekerActivity::class.java)
                             startActivity(intent)
                         } else {
-                            Toast.makeText(this@DetailSeekerActivity, "Gagal apply", Toast.LENGTH_LONG).show()
+                            Toast.makeText(this@DetailSeekerActivity, response.errorBody()?.string() , Toast.LENGTH_LONG).show()
                         }
                     }
                 })

@@ -60,16 +60,16 @@ class DetailAppliedSeekerActivity: AppCompatActivity() {
             apiClient.getApiInterface(this).cancelJob(id)
                 .enqueue(object: retrofit2.Callback<CancelJobResponse> {
                     override fun onFailure(call: Call<CancelJobResponse>, t: Throwable) {
-                        Toast.makeText(this@DetailAppliedSeekerActivity, "Failed to cancel job", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@DetailAppliedSeekerActivity, t.message , Toast.LENGTH_SHORT).show()
                     }
 
                     override fun onResponse(call: Call<CancelJobResponse>, response: Response<CancelJobResponse>) {
                         if (response.isSuccessful) {
-                            Toast.makeText(this@DetailAppliedSeekerActivity, "Job canceled", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@DetailAppliedSeekerActivity, response.body()?.message, Toast.LENGTH_SHORT).show()
                             val intent = Intent(this@DetailAppliedSeekerActivity, SeekerActivity::class.java)
                             startActivity(intent)
                         } else {
-                            Toast.makeText(this@DetailAppliedSeekerActivity, "Failed to cancel job", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@DetailAppliedSeekerActivity, response.errorBody()?.string() , Toast.LENGTH_SHORT).show()
                         }
                     }
                 })
@@ -116,16 +116,16 @@ class DetailAppliedSeekerActivity: AppCompatActivity() {
             apiClient.getApiInterface(this).cancelJob(id)
                 .enqueue(object: retrofit2.Callback<CancelJobResponse> {
                     override fun onFailure(call: Call<CancelJobResponse>, t: Throwable) {
-                        Toast.makeText(this@DetailAppliedSeekerActivity, "Failed to cancel job", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@DetailAppliedSeekerActivity, t.message , Toast.LENGTH_SHORT).show()
                     }
 
                     override fun onResponse(call: Call<CancelJobResponse>, response: Response<CancelJobResponse>) {
                         if (response.isSuccessful) {
-                            Toast.makeText(this@DetailAppliedSeekerActivity, "Job canceled", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@DetailAppliedSeekerActivity, response.body()?.message, Toast.LENGTH_SHORT).show()
                             val intent = Intent(this@DetailAppliedSeekerActivity, SeekerActivity::class.java)
                             startActivity(intent)
                         } else {
-                            Toast.makeText(this@DetailAppliedSeekerActivity, "Failed to cancel job", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@DetailAppliedSeekerActivity, response.errorBody()?.string() , Toast.LENGTH_SHORT).show()
                         }
                     }
                 })
