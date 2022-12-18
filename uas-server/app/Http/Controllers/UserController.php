@@ -141,11 +141,6 @@ class UserController extends Controller
     {
         try {
             $user = $request->user();
-            if($user->jenis_kelamin == 1){
-                $user->jenis_kelamin = 'Laki-laki';
-            } else {
-                $user->jenis_kelamin = 'Perempuan';
-            }
             $user->image = asset('storage/images/user/' . $user->image);
             return response()->json([
                 'message' => 'User fetched successfully',
