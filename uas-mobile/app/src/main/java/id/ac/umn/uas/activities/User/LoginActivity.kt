@@ -2,6 +2,7 @@ package id.ac.umn.uas.activities.User
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Window
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.Gson

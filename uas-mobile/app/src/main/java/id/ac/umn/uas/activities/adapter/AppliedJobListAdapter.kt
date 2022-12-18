@@ -69,11 +69,11 @@ class AppliedJobListAdapter(private val dataSet: List<Job>, private val context:
         viewHolder.gaji.text = dataSet[position].job_price
         viewHolder.deskripsi.text = dataSet[position].job_desc
 
-        if(dataSet[position].status == "0"){
+        if(dataSet[position].review_status == "0"){
             viewHolder.status.text = "Status : On Review"
-        }else if(dataSet[position].status == "1"){
+        }else if(dataSet[position].review_status == "1"){
             viewHolder.status.text = "Status : Accepted"
-        }else if(dataSet[position].status == "2"){
+        }else if(dataSet[position].review_status == "2"){
             viewHolder.status.text = "Status : Rejected"
         }else{
             viewHolder.status.text = "Status : Unknown"

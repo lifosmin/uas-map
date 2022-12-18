@@ -70,19 +70,8 @@ class UserController extends Controller
     public function userUpdate(Request $request)
     {
         try{
-            // check if request not null
-            if($request->hasFile('image')){
-                $image_uploaded_path = 'images/user';
-                $image = $request->file('image');
-                $image_name = request('nama') . '_' . time() . '.' . $image->getClientOriginalExtension();
-                $image->storeAs($image_uploaded_path, $image_name);
-            }
-
             // find user based on auth id
             $user = User::find(auth()->user()->id);
-            if($request->hasFile('image')){
-                $user->image = $image_name;
-            }
             if(request('nama') != null){
                 $user->nama = request('nama');
             }

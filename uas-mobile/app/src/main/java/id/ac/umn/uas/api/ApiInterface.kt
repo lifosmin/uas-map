@@ -21,17 +21,17 @@ interface ApiInterface {
         @Part("no_telp") no_telp: RequestBody
     ): Call<DefaultResponse>
 
-    @Multipart
-    @POST("user/login")
+    @FormUrlEncoded
+    @Headers("Accept: application/json")
+    @POST("user/update")
     fun updateUser(
-        @Part image: MultipartBody.Part,
-        @Part("nama") nama: RequestBody,
-        @Part("email") email: RequestBody,
-        @Part("password") password: RequestBody,
-        @Part("tanggal_lahir") tanggal_lahir: RequestBody,
-        @Part("jenis_kelamin") jenis_kelamin: RequestBody,
-        @Part("alamat") alamat: RequestBody,
-        @Part("no_telp") no_telp: RequestBody
+        @Field("nama") nama: String,
+        @Field("email") email: String,
+        @Field("password") password: String,
+        @Field("tanggal_lahir") tanggal_lahir: String,
+        @Field("jenis_kelamin") jenis_kelamin: String,
+        @Field("alamat") alamat: String,
+        @Field("no_telp") no_telp: String
     ): Call<UpdateUserResponse>
 
     @Multipart

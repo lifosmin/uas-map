@@ -3,6 +3,7 @@ package id.ac.umn.uas.activities.User
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import id.ac.umn.uas.R
 

@@ -16,59 +16,46 @@
         android:theme="@style/Theme.UAS"
         tools:targetApi="31">
         <activity android:name=".activities.provider.DetailProviderJobActivity"
-            android:theme="@style/AppTheme.NoActionBar"
             android:exported="false"/>
         <activity android:name=".activities.seeker.appliedjobs.DetailAppliedSeekerActivity"
-            android:theme="@style/AppTheme.NoActionBar"
             android:exported="false">
         </activity>
         <activity android:name=".activities.seeker.appliedjobs.SeekerAppliedJobActivity"
-            android:theme="@style/AppTheme.NoActionBar"
             android:exported="false">
         </activity>
         <activity android:name=".activities.seeker.DetailSeekerActivity"
-            android:theme="@style/AppTheme.NoActionBar"
             android:exported="false">
         </activity>
         <activity android:name=".activities.seeker.SeekerActivity"
-            android:theme="@style/AppTheme.NoActionBar"
             android:exported="false">
         </activity>
         <activity android:name=".activities.provider.AddJobActivity"
-            android:theme="@style/AppTheme.NoActionBar"
             android:exported="false">
         </activity>
         <activity android:name=".activities.provider.TrackDetailSeekerActivity"
-            android:theme="@style/AppTheme.NoActionBar"
             android:exported="false">
         </activity>
         <activity android:name=".activities.provider.TrackSeekerActivity"
-            android:theme="@style/AppTheme.NoActionBar"
             android:exported="false">
         </activity>
         <activity android:name=".activities.provider.ProviderActivity"
-            android:theme="@style/AppTheme.NoActionBar"
             android:exported="false">
         </activity>
         <activity android:name=".activities.User.ChoiceActivity"
-            android:theme="@style/AppTheme.NoActionBar"
             android:exported="false">
         </activity>
         <activity android:name=".activities.User.LoginActivity"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:fitsSystemWindows="false"
             android:exported="false">
         </activity>
         <activity android:name=".activities.User.SignupActivity"
-            android:theme="@style/AppTheme.NoActionBar"
             android:exported="false">
         </activity>
         <activity android:name=".activities.User.ProfileActivity"
-            android:theme="@style/AppTheme.NoActionBar"
             android:exported="false">
         </activity>
         <activity
             android:name=".activities.User.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

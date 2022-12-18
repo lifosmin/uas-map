@@ -50,4 +50,38 @@ class ChoiceActivity : AppCompatActivity() {
         }
 
     }
+
+    override fun onResume() {
+        super.onResume()
+
+        sp = getSharedPreferences("sharedPrefs", MODE_PRIVATE)
+        val user = sp.getString("user", null)
+        val userObj = Gson().fromJson(user, User::class.java)
+
+        val welcomeHead = findViewById<TextView>(R.id.welcomeHead)
+
+        var name = userObj.nama.split(" ")
+        var nameCap = name[0].capitalize()
+
+        welcomeHead.text = "Welcome, ${nameCap}"
+
+        var buttonProvider = findViewById<Button>(R.id.buttonProvider)
+        var buttonSeeker = findViewById<Button>(R.id.buttonSeeker)
+
+        buttonProvider.setOnClickListener {
+            val intentProvider = Intent(this, ProviderActivity::class.java)
+
+            intentProvider.putExtra("User", user.toString())
+
+            startActivity(intentProvider)
+        }
+        buttonSeeker.setOnClickListener {
+            val intentSeeker = Intent(this, SeekerActivity::class.java)
+
+            intentSeeker.putExtra("User", user.toString())
+
+            startActivity(intentSeeker)
+        }
+
+    }
 }

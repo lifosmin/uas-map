@@ -12,5 +12,6 @@ data class Job(
     val job_quota: String,
     val job_title: String,
     val status: String,
-    val updated_at: String
+    val updated_at: String,
+    val review_status: String,
 )
