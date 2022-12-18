@@ -33,6 +33,7 @@ class ChoiceActivity : AppCompatActivity() {
 
         var buttonProvider = findViewById<Button>(R.id.buttonProvider)
         var buttonSeeker = findViewById<Button>(R.id.buttonSeeker)
+        var buttonBiodata = findViewById<Button>(R.id.buttonBiodata)
 
         buttonProvider.setOnClickListener {
             val intentProvider = Intent(this, ProviderActivity::class.java)
@@ -47,6 +48,14 @@ class ChoiceActivity : AppCompatActivity() {
             intentSeeker.putExtra("User", user.toString())
 
             startActivity(intentSeeker)
+        }
+
+        buttonBiodata.setOnClickListener {
+            val intentBiodata = Intent(this, ProfileActivity::class.java)
+
+            intentBiodata.putExtra("User", user.toString())
+
+            startActivity(intentBiodata)
         }
 
     }
@@ -67,6 +76,7 @@ class ChoiceActivity : AppCompatActivity() {
 
         var buttonProvider = findViewById<Button>(R.id.buttonProvider)
         var buttonSeeker = findViewById<Button>(R.id.buttonSeeker)
+        var buttonBiodata = findViewById<Button>(R.id.buttonBiodata)
 
         buttonProvider.setOnClickListener {
             val intentProvider = Intent(this, ProviderActivity::class.java)
@@ -81,6 +91,13 @@ class ChoiceActivity : AppCompatActivity() {
             intentSeeker.putExtra("User", user.toString())
 
             startActivity(intentSeeker)
+        }
+        buttonBiodata.setOnClickListener {
+            val intentBiodata = Intent(this, ProfileActivity::class.java)
+
+            intentBiodata.putExtra("User", user.toString())
+
+            startActivity(intentBiodata)
         }
 
     }

@@ -92,4 +92,7 @@ interface ApiInterface {
 
     @GET("jobs/applicant")
     fun getJobApplicant(): Call<GetJobResponse>
+
+    @POST("token/logout")
+    fun logoutUser(): Call<LogoutResponse>
 }

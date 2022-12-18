@@ -1,6 +1,8 @@
 package id.ac.umn.uas.activities.provider
 
+import android.content.Intent
 import android.content.SharedPreferences
+import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
@@ -53,6 +55,8 @@ class TrackDetailSeekerActivity: AppCompatActivity() {
         val btnReject = findViewById<Button>(R.id.buttonReject)
         val id = findViewById<TextView>(R.id.userId)
 
+        val btnCall = findViewById<Button>(R.id.callHire)
+
 //        get data from intent
         val intent = intent
         val userId = intent.getStringExtra("id")
@@ -127,10 +131,18 @@ class TrackDetailSeekerActivity: AppCompatActivity() {
                     }
                 })
         }
+
+        btnCall.setOnClickListener {
+//            open activity call
+            val intent = Intent(Intent.ACTION_DIAL)
+            intent.data = Uri.parse("tel:$userKontak")
+            startActivity(intent)
+        }
     }
 
     override fun onResume() {
         super.onResume()
+        //        get user session
         apiClient = ApiClient()
 
         sessionManager = SessionManager(this)
@@ -155,6 +167,8 @@ class TrackDetailSeekerActivity: AppCompatActivity() {
         val btnReject = findViewById<Button>(R.id.buttonReject)
         val id = findViewById<TextView>(R.id.userId)
 
+        val btnCall = findViewById<Button>(R.id.callHire)
+
 //        get data from intent
         val intent = intent
         val userId = intent.getStringExtra("id")
@@ -194,8 +208,15 @@ class TrackDetailSeekerActivity: AppCompatActivity() {
         btnHire.setOnClickListener {
             apiClient.getApiInterface(this).acceptJob(tempJobId, tempUserId, "confirm")
                 .enqueue(object : retrofit2.Callback<ApproveHiringResponse> {
-                    override fun onFailure(call: retrofit2.Call<ApproveHiringResponse>, t: Throwable) {
-                        Toast.makeText(this@TrackDetailSeekerActivity, "User gagal dihire", Toast.LENGTH_SHORT).show()
+                    override fun onFailure(
+                        call: retrofit2.Call<ApproveHiringResponse>,
+                        t: Throwable
+                    ) {
+                        Toast.makeText(
+                            this@TrackDetailSeekerActivity,
+                            "User gagal dihire",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
 
                     override fun onResponse(
@@ -204,7 +225,8 @@ class TrackDetailSeekerActivity: AppCompatActivity() {
                     ) {
                         if (response.isSuccessful) {
                             val data = "User berhasil dihire"
-                            Toast.makeText(this@TrackDetailSeekerActivity, data, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@TrackDetailSeekerActivity, data, Toast.LENGTH_SHORT)
+                                .show()
                             finish()
                         }
                     }
@@ -213,8 +235,15 @@ class TrackDetailSeekerActivity: AppCompatActivity() {
         btnReject.setOnClickListener {
             apiClient.getApiInterface(this).acceptJob(tempJobId, tempUserId, "reject")
                 .enqueue(object : retrofit2.Callback<ApproveHiringResponse> {
-                    override fun onFailure(call: retrofit2.Call<ApproveHiringResponse>, t: Throwable) {
-                        Toast.makeText(this@TrackDetailSeekerActivity, "User gagal direject", Toast.LENGTH_SHORT).show()
+                    override fun onFailure(
+                        call: retrofit2.Call<ApproveHiringResponse>,
+                        t: Throwable
+                    ) {
+                        Toast.makeText(
+                            this@TrackDetailSeekerActivity,
+                            "User gagal direject",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
 
                     override fun onResponse(
@@ -223,11 +252,19 @@ class TrackDetailSeekerActivity: AppCompatActivity() {
                     ) {
                         if (response.isSuccessful) {
                             val data = "User berhasil direject"
-                            Toast.makeText(this@TrackDetailSeekerActivity, data, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@TrackDetailSeekerActivity, data, Toast.LENGTH_SHORT)
+                                .show()
                             finish()
                         }
                     }
                 })
+        }
+
+        btnCall.setOnClickListener {
+//            open activity call
+            val intent = Intent(Intent.ACTION_DIAL)
+            intent.data = Uri.parse("tel:$userKontak")
+            startActivity(intent)
         }
     }
 }

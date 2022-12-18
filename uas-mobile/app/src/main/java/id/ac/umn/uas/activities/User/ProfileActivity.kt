@@ -17,6 +17,7 @@ import com.google.gson.Gson
 import de.hdodenhof.circleimageview.CircleImageView
 import id.ac.umn.uas.R
 import id.ac.umn.uas.api.ApiClient
+import id.ac.umn.uas.models.LogoutResponse
 import id.ac.umn.uas.models.UpdateUserResponse
 import id.ac.umn.uas.models.User
 import okhttp3.*
@@ -50,6 +51,30 @@ class ProfileActivity : AppCompatActivity() {
         var editNoTelpText = findViewById<TextView>(R.id.editNoTelponText)
         var btnSimpan = findViewById<Button>(R.id.btnSimpan)
 
+        var btnLogout = findViewById<Button>(R.id.btnLogout)
+
+        btnLogout.setOnClickListener {
+            apiClient.getApiInterface(this).logoutUser().enqueue(object: retrofit2.Callback<LogoutResponse> {
+                override fun onResponse(call: Call<LogoutResponse>, response: Response<LogoutResponse>) {
+                    if(response.isSuccessful) {
+                        Toast.makeText(this@ProfileActivity, "Logout Berhasil!", Toast.LENGTH_LONG).show()
+                        val intent = Intent(this@ProfileActivity, LoginActivity::class.java)
+                        startActivity(intent)
+                        finishAffinity()
+                    } else {
+                        try {
+                            Toast.makeText(this@ProfileActivity, response.errorBody()!!.string(), Toast.LENGTH_LONG).show()
+                        } catch (e: IOException) {
+                            e.printStackTrace()
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<LogoutResponse>, t: Throwable) {
+                    Toast.makeText(this@ProfileActivity, t.message, Toast.LENGTH_SHORT).show()
+                }
+            })
+        }
 
         if (userObj.jenis_kelamin == "0") {
             radioKelamin.check(R.id.radioLaki)
@@ -151,6 +176,30 @@ class ProfileActivity : AppCompatActivity() {
         var editNoTelpText = findViewById<TextView>(R.id.editNoTelponText)
         var btnSimpan = findViewById<Button>(R.id.btnSimpan)
 
+        var btnLogout = findViewById<Button>(R.id.btnLogout)
+
+        btnLogout.setOnClickListener {
+            apiClient.getApiInterface(this).logoutUser().enqueue(object: retrofit2.Callback<LogoutResponse> {
+                override fun onResponse(call: Call<LogoutResponse>, response: Response<LogoutResponse>) {
+                    if(response.isSuccessful) {
+                        Toast.makeText(this@ProfileActivity, "Logout Berhasil!", Toast.LENGTH_LONG).show()
+                        val intent = Intent(this@ProfileActivity, LoginActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    } else {
+                        try {
+                            Toast.makeText(this@ProfileActivity, response.errorBody()!!.string(), Toast.LENGTH_LONG).show()
+                        } catch (e: IOException) {
+                            e.printStackTrace()
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<LogoutResponse>, t: Throwable) {
+                    Toast.makeText(this@ProfileActivity, t.message, Toast.LENGTH_SHORT).show()
+                }
+            })
+        }
 
         if (userObj.jenis_kelamin == "0") {
             radioKelamin.check(R.id.radioLaki)
